@@ -64,13 +64,6 @@ class RootViewController: UIViewController {
         bleeps.removeAll()
         setupBleeps(numberOfBleeps: bleepCount)
     }
-    
-    private func reset(action: UIAlertAction) {
-        cellsChecked = 0
-        stackView.subviews.forEach { $0.removeFromSuperview() }
-        board = setupGame(rows: rows, columns: columns)
-        setupBleeps(numberOfBleeps: bleepCount)
-    }
 
     @objc
     func cheat() {
@@ -136,11 +129,11 @@ class RootViewController: UIViewController {
         case .lost:
             title = "Bleep Thiiiiis..."
             message = "You've Lost... you shouldn't do that my dudes..."
-            action = UIAlertAction(title: "Try Again Loser", style: .destructive, handler: reset)
+            action = UIAlertAction(title: "Try Again Loser", style: .destructive, handler: restart)
         case .won:
             title = "You did iiiiit..."
             message = "yaaaay..."
-            action = UIAlertAction(title: "DO IT AGAIN", style: .destructive, handler: reset)
+            action = UIAlertAction(title: "DO IT AGAIN", style: .destructive, handler: restart)
         }
          
         let alert =  UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -242,6 +235,30 @@ class RootViewController: UIViewController {
         let bleepCount = checkIndex(row: cell.row, column: cell.column, in: board)
         cell.text = String(bleepCount)
         cell.backgroundColor = .white
+        
+        switch bleepCount {
+        case 0:
+            cell.textColor = .black
+        case 1:
+            cell.textColor = .blue
+        case 2:
+            cell.textColor = .green
+        case 3:
+            cell.textColor = .purple
+        case 4:
+            cell.textColor = .orange
+        case 5:
+            cell.textColor = .magenta
+        case 6:
+            cell.textColor = .brown
+        case 7:
+            cell.textColor = .link
+        case 8:
+            cell.textColor = .systemIndigo
+        default:
+            break
+        }
+        
         cellsChecked += 1
         
         if winConditionMet { win(); return }
