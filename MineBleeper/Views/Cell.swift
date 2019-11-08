@@ -14,12 +14,13 @@ class Cell: UILabel {
     
     let row: Int
     let column: Int
-    
+        
     init(row: Int, column: Int) {
         self.row = row
         self.column = column
         super.init(frame: .zero)
         backgroundColor = .black
+        font = UIFont(name: "KarmaticArcade", size: 8)
         isUserInteractionEnabled = true
         layer.borderColor = UIColor.white.cgColor
         layer.borderWidth = 1

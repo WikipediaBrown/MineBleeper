@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		5B3E73292375430C005FA313 /* RootBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3E73282375430C005FA313 /* RootBar.swift */; };
 		5B3E732B2375438C005FA313 /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3E732A2375438C005FA313 /* BoardView.swift */; };
+		5B3E73322375556B005FA313 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3E73312375556B005FA313 /* Constants.swift */; };
+		5B3E733823757A39005FA313 /* ka1.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5B3E733723757A26005FA313 /* ka1.ttf */; };
 		5BF14CDB2375007700387859 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF14CDA2375007700387859 /* AppDelegate.swift */; };
 		5BF14CDD2375007700387859 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF14CDC2375007700387859 /* SceneDelegate.swift */; };
 		5BF14CDF2375007700387859 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF14CDE2375007700387859 /* RootViewController.swift */; };
@@ -39,6 +41,8 @@
 /* Begin PBXFileReference section */
 		5B3E73282375430C005FA313 /* RootBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootBar.swift; sourceTree = "<group>"; };
 		5B3E732A2375438C005FA313 /* BoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
+		5B3E73312375556B005FA313 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		5B3E733723757A26005FA313 /* ka1.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ka1.ttf; sourceTree = "<group>"; };
 		5BF14CD72375007700387859 /* MineBleeper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MineBleeper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BF14CDA2375007700387859 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5BF14CDC2375007700387859 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -116,10 +120,12 @@
 				5BF14CDA2375007700387859 /* AppDelegate.swift */,
 				5BF14CDC2375007700387859 /* SceneDelegate.swift */,
 				5BF14CDE2375007700387859 /* RootViewController.swift */,
+				5B3E73312375556B005FA313 /* Constants.swift */,
 				5B3E732C23755215005FA313 /* Views */,
 				5BF14CE32375007900387859 /* Assets.xcassets */,
 				5BF14CE52375007900387859 /* LaunchScreen.storyboard */,
 				5BF14CE82375007900387859 /* Info.plist */,
+				5B3E733723757A26005FA313 /* ka1.ttf */,
 			);
 			path = MineBleeper;
 			sourceTree = "<group>";
@@ -246,6 +252,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B3E733823757A39005FA313 /* ka1.ttf in Resources */,
 				5BF14CE72375007900387859 /* LaunchScreen.storyboard in Resources */,
 				5BF14CE42375007900387859 /* Assets.xcassets in Resources */,
 			);
@@ -278,6 +285,7 @@
 				5B3E732B2375438C005FA313 /* BoardView.swift in Sources */,
 				5B3E73292375430C005FA313 /* RootBar.swift in Sources */,
 				5BF14CDD2375007700387859 /* SceneDelegate.swift in Sources */,
+				5B3E73322375556B005FA313 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
