@@ -20,7 +20,6 @@ class Cell: UILabel {
         self.column = column
         super.init(frame: .zero)
         backgroundColor = .black
-        font = UIFont(name: "KarmaticArcade", size: 16)
         isUserInteractionEnabled = true
         layer.borderColor = UIColor.white.cgColor
         layer.borderWidth = 1

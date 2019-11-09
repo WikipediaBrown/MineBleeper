@@ -20,13 +20,14 @@ class RootViewController: UIViewController {
     private let bleepCount = 45
     private let columns = 12
     private let navigationBar = RootBar()
+    private let rootLabel = RootLabel()
     private let rows = 24
     private let stackView = BoardView()
     
     private var board: [[Cell]] = []
-    private var cellCount: Int {rows * columns}
+    private var cellCount: Int { rows * columns }
     private var cellsChecked = 0
-    private var openableCells: Int {cellCount - bleepCount}
+    private var openableCells: Int { cellCount - bleepCount }
     private var statusBarShouldHide = true
     private var winConditionMet: Bool { cellsChecked == openableCells }
     
@@ -39,25 +40,27 @@ class RootViewController: UIViewController {
 
     // MARK: - Overriden Methods
 
-    override func viewDidLoad() { super.viewDidLoad(); setupViews() }
+//    override func viewDidLoad() { super.viewDidLoad(); setupViews() }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         statusBarShouldHide = !statusBarShouldHide
         UIView.animate(withDuration: 2) { [weak self] in
-            self?.stackView.alpha = 1
+//            self?.stackView.alpha = 1
             self?.setNeedsStatusBarAppearanceUpdate()
         }
         
         UIView.animate(withDuration: 3) { [weak self] in
             self?.navigationBar.alpha = 1
         }
+        addLogin() 
     }
     
     // MARK: - User Interaction Methods
     
     @objc
     func restart(action: UIAlertAction) {
+        UISelectionFeedbackGenerator().selectionChanged()
         cellsChecked = 0
         stackView.subviews.forEach { $0.removeFromSuperview() }
         board = setupGame(rows: rows, columns: columns)
@@ -67,6 +70,7 @@ class RootViewController: UIViewController {
 
     @objc
     func cheat() {
+        UISelectionFeedbackGenerator().selectionChanged()
         toggleBleeps()
     }
     
@@ -75,8 +79,10 @@ class RootViewController: UIViewController {
         guard let cell = sender.view as? Cell, cell.text == nil else { return }
         if cell.isBleep {
             cell.backgroundColor = .red
+            UINotificationFeedbackGenerator().notificationOccurred(.error)
             lose()
         } else {
+            UINotificationFeedbackGenerator().notificationOccurred(.success)
             test(cell: cell)
         }
     }
@@ -86,6 +92,8 @@ class RootViewController: UIViewController {
         guard let cell = sender.view as? Cell else { return }
         switch sender.state {
         case .began:
+            UINotificationFeedbackGenerator().notificationOccurred(.warning)
+            cell.font = UIFont.boldSystemFont(ofSize: 30)
             if cell.text == "⚑" {
                 cell.text = nil
             } else {
@@ -183,6 +191,27 @@ class RootViewController: UIViewController {
         return board
     }
     
+    private func addLogin() {
+        view.addSubview(rootLabel)
+
+        NSLayoutConstraint.activate([
+            rootLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            rootLabel.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height),
+            rootLabel.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width),
+        ])
+        UIView.animate(withDuration: 1, animations: { [weak self] in
+            self?.rootLabel.alpha = 1
+        })
+    }
+    
+    private func removeLogin() {
+        UIView.animate(withDuration: 1, animations: { [weak self] in
+            self?.rootLabel.alpha = 0
+        }) { [weak self] (complete) in
+            self?.rootLabel.removeFromSuperview()
+        }
+    }
+    
     private func setupViews() {
         let item = UINavigationItem()
            
@@ -191,7 +220,7 @@ class RootViewController: UIViewController {
         left.setTitle("TRY\nAGAIN", for: .normal)
         left.sizeToFit()
         left.addTarget(self, action: #selector(restart), for: .touchUpInside)
-        left.titleLabel?.font = UIFont(name: "KarmaticArcade", size: 12)
+        left.titleLabel?.font = UIFont(name: "KarmaticArcade", size: UIFont.labelFontSize)
         let tryAgain = UIBarButtonItem(customView: left)
         
         let right = UIButton(type: .custom)
@@ -200,7 +229,7 @@ class RootViewController: UIViewController {
         right.setTitle("TRY\nCHEATING", for: .normal)
         right.sizeToFit()
         right.addTarget(self, action: #selector(cheat), for: .touchUpInside)
-        right.titleLabel?.font = UIFont(name: "KarmaticArcade", size: 12)
+        right.titleLabel?.font = UIFont(name: "KarmaticArcade", size: UIFont.systemFontSize)
         let cheat = UIBarButtonItem(customView: right)
                 
         view.backgroundColor = .black
@@ -234,6 +263,7 @@ class RootViewController: UIViewController {
         
         let bleepCount = checkIndex(row: cell.row, column: cell.column, in: board)
         cell.text = String(bleepCount)
+        cell.font = UIFont(name: "KarmaticArcade", size: UIFont.systemFontSize)
         cell.backgroundColor = .white
         
         switch bleepCount {
@@ -283,6 +313,7 @@ class RootViewController: UIViewController {
             let column: Int = index % columns
             board[row][column].backgroundColor =  board[row][column].backgroundColor == .red ? .black : .red
             board[row][column].textColor = .black
+            board[row][column].font = UIFont.boldSystemFont(ofSize: UIFont.systemFontSize)
             board[row][column].text = board[row][column].text == nil ? "☠︎" : nil
         }
     }
