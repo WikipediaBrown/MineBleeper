@@ -13,6 +13,7 @@
 		5B3E733823757A39005FA313 /* ka1.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5B3E733723757A26005FA313 /* ka1.ttf */; };
 		5B95C35E23764C6700539396 /* RootLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B95C35D23764C6700539396 /* RootLabel.swift */; };
 		5BB6A79923791EC300A97716 /* Movement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB6A79823791EC200A97716 /* Movement.swift */; };
+		5BB6A79D2379549900A97716 /* GuestButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB6A79C2379549900A97716 /* GuestButton.swift */; };
 		5BF14CDB2375007700387859 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF14CDA2375007700387859 /* AppDelegate.swift */; };
 		5BF14CDD2375007700387859 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF14CDC2375007700387859 /* SceneDelegate.swift */; };
 		5BF14CDF2375007700387859 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF14CDE2375007700387859 /* RootViewController.swift */; };
@@ -48,6 +49,7 @@
 		5B95C35D23764C6700539396 /* RootLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootLabel.swift; sourceTree = "<group>"; };
 		5BB6A79723769AFA00A97716 /* MineBleeper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MineBleeper.entitlements; sourceTree = "<group>"; };
 		5BB6A79823791EC200A97716 /* Movement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movement.swift; sourceTree = "<group>"; };
+		5BB6A79C2379549900A97716 /* GuestButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestButton.swift; sourceTree = "<group>"; };
 		5BF14CD72375007700387859 /* MineBleeper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MineBleeper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BF14CDA2375007700387859 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5BF14CDC2375007700387859 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 				5BF14D0A2375067800387859 /* Cell.swift */,
 				5B3E73282375430C005FA313 /* RootBar.swift */,
 				5B95C35D23764C6700539396 /* RootLabel.swift */,
+				5BB6A79C2379549900A97716 /* GuestButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -291,6 +294,7 @@
 				5BF14D0B2375067800387859 /* Cell.swift in Sources */,
 				5BB6A79923791EC300A97716 /* Movement.swift in Sources */,
 				5BF14CDB2375007700387859 /* AppDelegate.swift in Sources */,
+				5BB6A79D2379549900A97716 /* GuestButton.swift in Sources */,
 				5B3E732B2375438C005FA313 /* BoardView.swift in Sources */,
 				5B3E73292375430C005FA313 /* RootBar.swift in Sources */,
 				5BF14CDD2375007700387859 /* SceneDelegate.swift in Sources */,

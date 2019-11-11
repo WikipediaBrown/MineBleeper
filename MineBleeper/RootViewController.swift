@@ -19,6 +19,7 @@ class RootViewController: UIViewController {
 
     private let bleepCount = 45
     private let columns = 12
+    private let guestbutton = GuestButton()
     private let movement = Movement()
     private let navigationBar = RootBar()
     private let rootLabel = RootLabel()
@@ -47,17 +48,25 @@ class RootViewController: UIViewController {
         super.viewDidAppear(animated)
         statusBarShouldHide = !statusBarShouldHide
         UIView.animate(withDuration: 2) { [weak self] in
-//            self?.stackView.alpha = 1
             self?.setNeedsStatusBarAppearanceUpdate()
-        }
-        
-        UIView.animate(withDuration: 3) { [weak self] in
-            self?.navigationBar.alpha = 1
         }
         addLogin() 
     }
     
     // MARK: - User Interaction Methods
+    
+    @objc
+    func guestButtonTapped() {
+        removeLogin { [weak self] in
+            self?.setupViews()
+            UIView.animate(withDuration: 2) { [weak self] in
+                self?.stackView.alpha = 1
+            }
+            UIView.animate(withDuration: 3) { [weak self] in
+                self?.navigationBar.alpha = 1
+            }
+        }
+    }
     
     @objc
     func restart(action: UIAlertAction) {
@@ -194,22 +203,38 @@ class RootViewController: UIViewController {
     
     private func addLogin() {
         view.addSubview(rootLabel)
+        view.addSubview(guestbutton)
+        
+        guestbutton.addTarget(self, action: #selector(guestButtonTapped), for: .touchUpInside)
 
         NSLayoutConstraint.activate([
             rootLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            rootLabel.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height),
-            rootLabel.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width),
+            rootLabel.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height / 3),
+            rootLabel.leftAnchor.constraint(equalTo: view.layoutMarginsGuide.leftAnchor),
+            rootLabel.rightAnchor.constraint(equalTo: view.layoutMarginsGuide.rightAnchor)
         ])
+        
+        NSLayoutConstraint.activate([
+            guestbutton.topAnchor.constraint(equalTo: rootLabel.bottomAnchor),
+            guestbutton.leftAnchor.constraint(equalTo: view.leftAnchor),
+            guestbutton.rightAnchor.constraint(equalTo: view.rightAnchor),
+            guestbutton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
+        
         UIView.animate(withDuration: 1, animations: { [weak self] in
             self?.rootLabel.alpha = 1
+            self?.guestbutton.alpha = 1
         })
     }
     
-    private func removeLogin() {
+    private func removeLogin(onCompletion: @escaping () -> Void) {
         UIView.animate(withDuration: 1, animations: { [weak self] in
             self?.rootLabel.alpha = 0
+            self?.guestbutton.alpha = 0
         }) { [weak self] (complete) in
             self?.rootLabel.removeFromSuperview()
+            self?.guestbutton.removeFromSuperview()
+            onCompletion()
         }
     }
     
@@ -230,7 +255,7 @@ class RootViewController: UIViewController {
         right.setTitle("TRY\nCHEATING", for: .normal)
         right.sizeToFit()
         right.addTarget(self, action: #selector(cheat), for: .touchUpInside)
-        right.titleLabel?.font = UIFont(name: "KarmaticArcade", size: UIFont.systemFontSize)
+        right.titleLabel?.font = UIFont(name: "KarmaticArcade", size: UIFont.labelFontSize)
         let cheat = UIBarButtonItem(customView: right)
                 
         view.backgroundColor = .black
@@ -318,27 +343,5 @@ class RootViewController: UIViewController {
             board[row][column].text = board[row][column].text == nil ? "☠︎" : nil
         }
     }
-    
-    
-    
-    
-    
-    
-    private func startTimer() {
-        
-        
-        
-//        return CACurrentMediaTime()
-    }
-    
-    private func pauseTimer() {}
-    private func resumeTimer() {}
-    private func stopTimer() {}
-    
-    
-    
-    
-    
-
 }
 
