@@ -19,6 +19,7 @@ class RootViewController: UIViewController {
 
     private let bleepCount = 45
     private let columns = 12
+    private let movement = Movement()
     private let navigationBar = RootBar()
     private let rootLabel = RootLabel()
     private let rows = 24
@@ -317,6 +318,27 @@ class RootViewController: UIViewController {
             board[row][column].text = board[row][column].text == nil ? "☠︎" : nil
         }
     }
+    
+    
+    
+    
+    
+    
+    private func startTimer() {
+        
+        
+        
+//        return CACurrentMediaTime()
+    }
+    
+    private func pauseTimer() {}
+    private func resumeTimer() {}
+    private func stopTimer() {}
+    
+    
+    
+    
+    
 
 }
 
