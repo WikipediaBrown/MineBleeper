@@ -4,3 +4,12 @@
 
 # For more information about the Appfile, see:
 #     https://docs.fastlane.tools/advanced/#appfile
+
+apple_id(ENV["APPLEID"])
+username(ENV["APPLEID"])
+app_indentifier(ENV["BUNDLEID"])
+app_name(ENV["APPNAME"])
+language(ENV["LANGUAGE"])
+app_version(ENV["APPVERSION"])
+sku(ENV["SKU"])
+team_name(ENV["TEAMNAME"])
