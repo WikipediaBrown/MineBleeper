@@ -12,11 +12,12 @@ class RootLabel: UILabel {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        alpha = 0
-        numberOfLines = 2
-        text = "Mine\nBleeper"
-        font = UIFont(name: "KarmaticArcade", size: 500)
+//        alpha = 1
         adjustsFontSizeToFitWidth = true
+        font = UIFont.systemFont(ofSize: 500, weight: .black)
+        numberOfLines = 2
+        preservesSuperviewLayoutMargins = true
+        text = "Mine Bleeper"
         textColor = .white
         translatesAutoresizingMaskIntoConstraints = false
     }

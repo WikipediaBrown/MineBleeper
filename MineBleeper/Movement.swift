@@ -12,18 +12,25 @@ import UIKit
 /// Movement is a class that attempts to provide the most precise timer available. It has facilities for start, pause, resume, reset and the ability to call mulitple closures on an interval set by the user.
 class Movement {
     
-    // MARK: - Private Properties
+    // MARK: - Open Properties
+    open var state: State?
+    open var totalTime: TimeInterval { (CACurrentMediaTime() - startTime) + sessions.reduce(0) {$0 + $1} }
     
+    public enum State {
+        case active
+        case suspended
+    }
+    
+    // MARK: - Private Properties
+    private let queue: DispatchQueue
     private let leeway: DispatchTimeInterval
     private let precision: DispatchTimeInterval
-//    private let tolerance: DispatchTimeInterval
     
-    private var isActive: Bool = false
+    private var activated: Bool { state != nil }
     private var sessions: [TimeInterval] = []
     private var startTime: TimeInterval = .zero
     private var stopTime: TimeInterval = .zero
     private var timer: DispatchSourceTimer?
-    private var totalTime: TimeInterval { startTime + sessions.reduce(0) {$0 + $1} }
     private var workItems: [UUID: () -> Void] = [:]
     
     // MARK: - Initializer
@@ -32,12 +39,19 @@ class Movement {
     /// - Parameters:
     ///   - leeway: 'leeway' is the amount of time that the timer can be allowed drift.
     ///   - precision: 'precision' is the interval between repeating executions of work items.
-    init(leeway: DispatchTimeInterval = .milliseconds(1), precision: DispatchTimeInterval = .seconds(1)) {
+    ///   - strict: 'strict' is a boolean that is used to determine if teh timer should be strictly observed or not.
+    init(leeway: DispatchTimeInterval = .nanoseconds(1),
+         precision: DispatchTimeInterval = .seconds(1),
+         strict: Bool = true) {
+        self.queue = DispatchQueue(label: "com.movement.queue", qos: .userInteractive)
         self.leeway = leeway
         self.precision = precision
-        self.timer = DispatchSource.makeTimerSource(queue: DispatchQueue(label: "com.movement.queue"))
-
-        timer?.schedule(deadline: .now(), repeating: precision, leeway: leeway)
+        if strict {
+            self.timer = DispatchSource.makeTimerSource(flags: .strict, queue: queue)
+        } else {
+            self.timer = DispatchSource.makeTimerSource(queue: queue)
+        }
+        timer?.schedule(deadline: .now() + precision, repeating: precision, leeway: leeway)
         timer?.setEventHandler { [weak self] in self?.tic() }
     }
     
@@ -57,35 +71,45 @@ class Movement {
         
     func pause() {
         sessions.append(startTime - stopTime)
-        startTime = .zero
-        stopTime = CACurrentMediaTime()
-        timer?.suspend()
+        suspend()
     }
     
     func reset() {
         sessions.removeAll()
-        startTime = .zero
-        stopTime = CACurrentMediaTime()
-        timer?.suspend()
+        suspend()
     }
     
     func resume() {
+        guard state != .active else { return }
+        state = .active
         startTime = CACurrentMediaTime()
         timer?.resume()
     }
     
     func start() {
-        if isActive {
+        startTime = CACurrentMediaTime()
+        if activated {
             timer?.resume()
         } else {
-            isActive = true
             timer?.activate()
         }
+        state = .active
     }
     
     // MARK: - Private Functions
     
+    private func suspend() {
+        guard state != .suspended else { return }
+        state = .suspended
+        startTime = .zero
+        stopTime = CACurrentMediaTime()
+        timer?.suspend()
+    }
+    
     private func tic() {
+        totalTime > 1
+//        print(totalTime)
+
         workItems.values.forEach { $0() }
     }
     
@@ -95,6 +119,7 @@ class Movement {
         sessions.removeAll()
         timer?.setEventHandler(handler: nil)
         timer?.cancel()
+        resume()
         timer = nil
     }
 }

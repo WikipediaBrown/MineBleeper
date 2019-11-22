@@ -11,14 +11,58 @@
 #
 
 # Uncomment the line if you want fastlane to automatically update itself
-update_fastlane
+# update_fastlane
 
 default_platform(:ios)
 
 platform :ios do
-  desc "Description of what the lane does"
-  lane :create_app do
-    produce()
-    # add actions here: https://docs.fastlane.tools/actions
+
+  desc "Send #{ENV["PRODUCE_APP_NAME"]} to TestFlight."
+  lane :release_to_testflight do
+    build_for_apple_distribution
+    pilot(
+      ipa: "./fastlane/apple_build/#{ENV["PRODUCE_APP_NAME"]}.ipa",
+      skip_waiting_for_build_processing: false,
+      changelog: "Version {lane_context[SharedValues: VERSION_NUMBER]}, Build {lane_context[SharedValues: BUILD_NUMBER]}"
+    )
   end
+
+  desc "Build #{ENV["PRODUCE_APP_NAME"]} for TestFlight & AppStore"
+  lane :build_for_apple_distribution do
+    produce
+    # unit_test
+    # ui_test
+    deliver # Updating Metadata
+    precheck
+    # create_screenshots
+    match_with_options(type: "appstore")
+    increment_build_number(build_number: Time.now.to_i)
+    gym(
+      output_directory: "./fastlane/apple_build",
+      export_method: "app-store"
+    )
+  end
+
+  desc "Resolve Signing Certificates and Provisioning Profiles for #{ENV["PRODUCE_APP_NAME"]}."
+  lane :match_with_options do |options|
+    matchType = options[:type]
+    match(type: matchType, readonly: false)
+  end
+
+  # desc "Create and Frame #{ENV["PRODUCE_APP_NAME"]} Screenshots."
+  # lane :create_screenshots do
+  #   snapshot
+  #   frameit(path: "./docs", rose_gold: true)
+  # end
+
+  desc "#{ENV["PRODUCE_APP_NAME"]} Unit Tests."
+  lane :unit_test do
+    scan(only_testing: "#{ENV["PRODUCE_APP_NAME"]}Tests")
+  end
+
+  desc "#{ENV["PRODUCE_APP_NAME"]} UI Tests."
+  lane :ui_test do
+    scan(only_testing: "#{ENV["PRODUCE_APP_NAME"]}UITests")
+  end
+
 end

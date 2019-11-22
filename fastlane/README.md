@@ -16,11 +16,21 @@ or alternatively using `brew cask install fastlane`
 
 # Available Actions
 ## iOS
-### ios create_app
+### ios release_to_testflight
 ```
-fastlane ios create_app
+fastlane ios release_to_testflight
 ```
-Description of what the lane does
+Send MineBleeper to TestFlight.
+### ios build_for_apple_distribution
+```
+fastlane ios build_for_apple_distribution
+```
+Build MineBleeper for TestFlight & AppStore
+### ios match_with_options
+```
+fastlane ios match_with_options
+```
+Resolve Signing Certificates and Provisioning Profiles for MineBleeper.
 
 ----
 

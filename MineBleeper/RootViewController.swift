@@ -29,6 +29,7 @@ class RootViewController: UIViewController {
     private var board: [[Cell]] = []
     private var cellCount: Int { rows * columns }
     private var cellsChecked = 0
+    private var onTicUUID: UUID?
     private var openableCells: Int { cellCount - bleepCount }
     private var statusBarShouldHide = true
     private var winConditionMet: Bool { cellsChecked == openableCells }
@@ -46,10 +47,6 @@ class RootViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        statusBarShouldHide = !statusBarShouldHide
-        UIView.animate(withDuration: 2) { [weak self] in
-            self?.setNeedsStatusBarAppearanceUpdate()
-        }
         addLogin() 
     }
     
@@ -84,8 +81,35 @@ class RootViewController: UIViewController {
         toggleBleeps()
     }
     
+    var first = true
+    var taps = 0
+    
+    func getScore() -> Double {
+//        print(taps)
+//        print(movement.totalTime)
+        return /*Double(taps) * */movement.totalTime
+    }
+    
+    func onTic() {
+        DispatchQueue.main.async { [weak self] in
+            guard let score = self?.getScore() else { return }
+            print(score)
+            self?.navigationBar.topItem?.title = "\(score)"
+        }
+    }
+    
     @objc
     func check(sender: UITapGestureRecognizer) {
+        
+        
+        taps += 1
+
+        if first {
+            first = false
+            onTicUUID = movement.add { [weak self] in self?.onTic() }
+            movement.start()
+        }
+
         guard let cell = sender.view as? Cell, cell.text == nil else { return }
         if cell.isBleep {
             cell.backgroundColor = .red
@@ -202,29 +226,27 @@ class RootViewController: UIViewController {
     }
     
     private func addLogin() {
+        statusBarShouldHide = !statusBarShouldHide
+        guestbutton.addTarget(self, action: #selector(guestButtonTapped), for: .touchUpInside)
+        
         view.addSubview(rootLabel)
         view.addSubview(guestbutton)
-        
-        guestbutton.addTarget(self, action: #selector(guestButtonTapped), for: .touchUpInside)
 
         NSLayoutConstraint.activate([
-            rootLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            rootLabel.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height / 3),
-            rootLabel.leftAnchor.constraint(equalTo: view.layoutMarginsGuide.leftAnchor),
-            rootLabel.rightAnchor.constraint(equalTo: view.layoutMarginsGuide.rightAnchor)
+            rootLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            rootLabel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            rootLabel.leftAnchor.constraint(equalTo: view.leftAnchor),
+            rootLabel.rightAnchor.constraint(equalTo: view.rightAnchor)
         ])
         
         NSLayoutConstraint.activate([
-            guestbutton.topAnchor.constraint(equalTo: rootLabel.bottomAnchor),
-            guestbutton.leftAnchor.constraint(equalTo: view.leftAnchor),
-            guestbutton.rightAnchor.constraint(equalTo: view.rightAnchor),
-            guestbutton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            guestbutton.leftAnchor.constraint(equalTo: view.layoutMarginsGuide.leftAnchor),
+            guestbutton.rightAnchor.constraint(equalTo: view.layoutMarginsGuide.rightAnchor),
+            guestbutton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -UIScreen.main.bounds.height/4)
         ])
         
-        UIView.animate(withDuration: 1, animations: { [weak self] in
-            self?.rootLabel.alpha = 1
-            self?.guestbutton.alpha = 1
-        })
+        UIView.animate(withDuration: 2) { [weak self] in self?.setNeedsStatusBarAppearanceUpdate() }
+        UIView.animate(withDuration: 1) { [weak self] in self?.guestbutton.alpha = 1 }
     }
     
     private func removeLogin(onCompletion: @escaping () -> Void) {
@@ -246,7 +268,7 @@ class RootViewController: UIViewController {
         left.setTitle("TRY\nAGAIN", for: .normal)
         left.sizeToFit()
         left.addTarget(self, action: #selector(restart), for: .touchUpInside)
-        left.titleLabel?.font = UIFont(name: "KarmaticArcade", size: UIFont.labelFontSize)
+        left.titleLabel?.font = UIFont.systemFont(ofSize: UIFont.labelFontSize, weight: UIFont.Weight.black)
         let tryAgain = UIBarButtonItem(customView: left)
         
         let right = UIButton(type: .custom)
@@ -255,10 +277,9 @@ class RootViewController: UIViewController {
         right.setTitle("TRY\nCHEATING", for: .normal)
         right.sizeToFit()
         right.addTarget(self, action: #selector(cheat), for: .touchUpInside)
-        right.titleLabel?.font = UIFont(name: "KarmaticArcade", size: UIFont.labelFontSize)
+        right.titleLabel?.font = UIFont.systemFont(ofSize: UIFont.labelFontSize, weight: UIFont.Weight.black)
         let cheat = UIBarButtonItem(customView: right)
                 
-        view.backgroundColor = .black
         view.addSubview(stackView)
         view.addSubview(navigationBar)
         

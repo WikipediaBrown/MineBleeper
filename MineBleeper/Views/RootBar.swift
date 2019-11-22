@@ -16,6 +16,7 @@ class RootBar: UINavigationBar {
         tintColor = .white
         barTintColor = .black
         isTranslucent = false
+        titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.red]
         translatesAutoresizingMaskIntoConstraints = false
     }
     

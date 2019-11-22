@@ -23,3 +23,25 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 }
 
+//func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+//    // Override point for customization after application launch.
+//    imageArr = ["1.jpeg","2.jpeg","3.jpeg","4.jpeg"]
+//
+//    let RandomNumber = Int(arc4random_uniform(UInt32(self.imageArr.count)))
+//    //imageArr is array of images
+//     let image = UIImage.init(named: "\(imageArr[RandomNumber])")
+//
+//    let imageView = UIImageView.init(image: image)
+//    imageView.frame = UIScreen.main.bounds
+//
+//    window = UIWindow(frame: UIScreen.main.bounds)
+//    window?.rootViewController = UIStoryboard(name: "LaunchScreen", bundle: nil).instantiateInitialViewController()
+//    window?.rootViewController?.view.addSubview(imageView)
+//    window?.rootViewController?.view.bringSubview(toFront: imageView)
+//    window?.makeKeyAndVisible()
+//
+//    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3) {
+//        self.window?.rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()
+//    }
+//    return true
+//}

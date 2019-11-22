@@ -11,6 +11,7 @@
 		5B3E732B2375438C005FA313 /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3E732A2375438C005FA313 /* BoardView.swift */; };
 		5B3E73322375556B005FA313 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3E73312375556B005FA313 /* Constants.swift */; };
 		5B3E733823757A39005FA313 /* ka1.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5B3E733723757A26005FA313 /* ka1.ttf */; };
+		5B8762B22386387700E2F97A /* Scoreboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8762B12386387700E2F97A /* Scoreboard.swift */; };
 		5B95C35E23764C6700539396 /* RootLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B95C35D23764C6700539396 /* RootLabel.swift */; };
 		5BB6A79923791EC300A97716 /* Movement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB6A79823791EC200A97716 /* Movement.swift */; };
 		5BB6A79D2379549900A97716 /* GuestButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB6A79C2379549900A97716 /* GuestButton.swift */; };
@@ -46,6 +47,7 @@
 		5B3E732A2375438C005FA313 /* BoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
 		5B3E73312375556B005FA313 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		5B3E733723757A26005FA313 /* ka1.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ka1.ttf; sourceTree = "<group>"; };
+		5B8762B12386387700E2F97A /* Scoreboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scoreboard.swift; sourceTree = "<group>"; };
 		5B95C35D23764C6700539396 /* RootLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootLabel.swift; sourceTree = "<group>"; };
 		5BB6A79723769AFA00A97716 /* MineBleeper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MineBleeper.entitlements; sourceTree = "<group>"; };
 		5BB6A79823791EC200A97716 /* Movement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movement.swift; sourceTree = "<group>"; };
@@ -96,9 +98,10 @@
 			children = (
 				5B3E732A2375438C005FA313 /* BoardView.swift */,
 				5BF14D0A2375067800387859 /* Cell.swift */,
+				5BB6A79C2379549900A97716 /* GuestButton.swift */,
 				5B3E73282375430C005FA313 /* RootBar.swift */,
 				5B95C35D23764C6700539396 /* RootLabel.swift */,
-				5BB6A79C2379549900A97716 /* GuestButton.swift */,
+				5B8762B12386387700E2F97A /* Scoreboard.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -126,7 +129,6 @@
 		5BF14CD92375007700387859 /* MineBleeper */ = {
 			isa = PBXGroup;
 			children = (
-				5BB6A79723769AFA00A97716 /* MineBleeper.entitlements */,
 				5BF14CDA2375007700387859 /* AppDelegate.swift */,
 				5BF14CDC2375007700387859 /* SceneDelegate.swift */,
 				5BF14CDE2375007700387859 /* RootViewController.swift */,
@@ -137,6 +139,7 @@
 				5BF14CE52375007900387859 /* LaunchScreen.storyboard */,
 				5BF14CE82375007900387859 /* Info.plist */,
 				5B3E733723757A26005FA313 /* ka1.ttf */,
+				5BB6A79723769AFA00A97716 /* MineBleeper.entitlements */,
 			);
 			path = MineBleeper;
 			sourceTree = "<group>";
@@ -227,13 +230,16 @@
 				TargetAttributes = {
 					5BF14CD62375007700387859 = {
 						CreatedOnToolsVersion = 11.2;
+						ProvisioningStyle = Automatic;
 					};
 					5BF14CEC2375007900387859 = {
 						CreatedOnToolsVersion = 11.2;
+						ProvisioningStyle = Automatic;
 						TestTargetID = 5BF14CD62375007700387859;
 					};
 					5BF14CF72375007900387859 = {
 						CreatedOnToolsVersion = 11.2;
+						ProvisioningStyle = Automatic;
 						TestTargetID = 5BF14CD62375007700387859;
 					};
 				};
@@ -299,6 +305,7 @@
 				5B3E73292375430C005FA313 /* RootBar.swift in Sources */,
 				5BF14CDD2375007700387859 /* SceneDelegate.swift in Sources */,
 				5B95C35E23764C6700539396 /* RootLabel.swift in Sources */,
+				5B8762B22386387700E2F97A /* Scoreboard.swift in Sources */,
 				5B3E73322375556B005FA313 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -472,6 +479,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 0.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.IamGoodBad.MineBleeper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -491,6 +499,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 0.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.IamGoodBad.MineBleeper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
