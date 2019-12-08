@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RootBar: UINavigationBar {
+class BoardBar: UINavigationBar {
     
     override init(frame: CGRect) {
         super.init(frame: frame)

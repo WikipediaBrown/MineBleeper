@@ -21,7 +21,7 @@ class RootViewController: UIViewController {
     private let columns = 12
     private let guestbutton = GuestButton()
     private let movement = Movement()
-    private let navigationBar = RootBar()
+    private let navigationBar = BoardBar()
     private let rootLabel = RootLabel()
     private let rows = 24
     private let stackView = BoardView()
@@ -84,24 +84,20 @@ class RootViewController: UIViewController {
     var first = true
     var taps = 0
     
-    func getScore() -> Double {
-//        print(taps)
-//        print(movement.totalTime)
-        return /*Double(taps) * */movement.totalTime
+    func getScore() -> Int {
+        let score = Double(taps) * (movement.totalTime + 1)
+        return Int(score)
     }
     
     func onTic() {
         DispatchQueue.main.async { [weak self] in
             guard let score = self?.getScore() else { return }
-            print(score)
             self?.navigationBar.topItem?.title = "\(score)"
         }
     }
     
     @objc
     func check(sender: UITapGestureRecognizer) {
-        
-        
         taps += 1
 
         if first {
@@ -261,6 +257,8 @@ class RootViewController: UIViewController {
     }
     
     private func setupViews() {
+        
+        
         let item = UINavigationItem()
            
         let left = UIButton(type: .custom)

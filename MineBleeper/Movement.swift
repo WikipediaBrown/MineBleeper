@@ -9,12 +9,12 @@
 import UIKit
 
 
-/// Movement is a class that attempts to provide the most precise timer available. It has facilities for start, pause, resume, reset and the ability to call mulitple closures on an interval set by the user.
+/// Movement is a class that attempts to provide the most precise timer available. It has facilities for start, pause, resume, reset and the ability to call mulitple closures on an interval set by the user. There is normally an initial lag equal to about half of the precision interval set on initlaization.
 class Movement {
     
     // MARK: - Open Properties
     open var state: State?
-    open var totalTime: TimeInterval { (CACurrentMediaTime() - startTime) + sessions.reduce(0) {$0 + $1} }
+    open var totalTime: TimeInterval { CFAbsoluteTimeGetCurrent() - startTime + sessions.reduce(0) {$0 + $1} }
     
     public enum State {
         case active
@@ -32,18 +32,19 @@ class Movement {
     private var stopTime: TimeInterval = .zero
     private var timer: DispatchSourceTimer?
     private var workItems: [UUID: () -> Void] = [:]
-    
+    private var firstTic: Bool = true
+
     // MARK: - Initializer
     
-    /// The initializer has defaults set for all of its parameters.
+    /// This initializer has defaults set for all of its parameters.
     /// - Parameters:
     ///   - leeway: 'leeway' is the amount of time that the timer can be allowed drift.
     ///   - precision: 'precision' is the interval between repeating executions of work items.
     ///   - strict: 'strict' is a boolean that is used to determine if teh timer should be strictly observed or not.
-    init(leeway: DispatchTimeInterval = .nanoseconds(1),
+    init(leeway: DispatchTimeInterval = .nanoseconds(0),
          precision: DispatchTimeInterval = .seconds(1),
          strict: Bool = true) {
-        self.queue = DispatchQueue(label: "com.movement.queue", qos: .userInteractive)
+        self.queue = DispatchQueue(label: "com.movement.queue", qos: .background)
         self.leeway = leeway
         self.precision = precision
         if strict {
@@ -82,12 +83,12 @@ class Movement {
     func resume() {
         guard state != .active else { return }
         state = .active
-        startTime = CACurrentMediaTime()
+        startTime = CFAbsoluteTimeGetCurrent()
         timer?.resume()
     }
     
     func start() {
-        startTime = CACurrentMediaTime()
+        startTime = CFAbsoluteTimeGetCurrent()
         if activated {
             timer?.resume()
         } else {
@@ -102,14 +103,13 @@ class Movement {
         guard state != .suspended else { return }
         state = .suspended
         startTime = .zero
-        stopTime = CACurrentMediaTime()
+        stopTime = CFAbsoluteTimeGetCurrent()
         timer?.suspend()
+        firstTic = true
     }
-    
+        
     private func tic() {
-        totalTime > 1
-//        print(totalTime)
-
+        if firstTic { firstTic = false; return }
         workItems.values.forEach { $0() }
     }
     
@@ -117,6 +117,7 @@ class Movement {
     
     deinit {
         sessions.removeAll()
+        workItems.removeAll()
         timer?.setEventHandler(handler: nil)
         timer?.cancel()
         resume()
