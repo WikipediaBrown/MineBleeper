@@ -20,7 +20,6 @@ class Cell: UILabel {
         self.column = column
         super.init(frame: .zero)
         backgroundColor = .black
-        font = UIFont(name: "KarmaticArcade", size: UIFont.systemFontSize)
         isUserInteractionEnabled = true
         layer.borderColor = UIColor.white.cgColor
         layer.borderWidth = 1
@@ -34,14 +33,15 @@ class Cell: UILabel {
     }
     
     func update(with tile: Bleepable?) {
-        guard tile?.flagged == false else { text = "⚑"; return }
-        guard let bleepCount = tile?.surroundingBleeps else { return }
+        guard tile?.flagged == false else {textColor = .red; text = "⚑"; return }
+
+        backgroundColor = tile?.surroundingBleeps == nil ? .black : .white
+        font = UIFont(name: "KarmaticArcade", size: UIFont.systemFontSize)
+        text = tile?.surroundingBleeps?.description
         
-        backgroundColor = .white
-        
-        switch bleepCount {
+        switch tile?.surroundingBleeps {
         case 0:
-            textColor = .black
+            text = nil; return 
         case 1:
             textColor = .blue
         case 2:
@@ -61,8 +61,5 @@ class Cell: UILabel {
         default:
             break
         }
-        
-        if bleepCount > 0 { text = String(describing: bleepCount) }
-        else { text = nil }
     }
 }

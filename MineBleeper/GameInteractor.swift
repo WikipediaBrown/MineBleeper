@@ -8,63 +8,72 @@
 
 import UIKit
 
-protocol GameInteractable {
-    func onColumnCount() -> Int
-    func onRowCount() -> Int
-    func onSelectIndex(at indexPath: IndexPath)
-    func onToggleFlag(at indexPath: IndexPath)
-    func onTryAgain()
-    func toggleTryCheating()
-}
-
 protocol GamePresentable {
     func presentError()
-    func presentLoss()
-    func presentWin()
+    func presentLogin()
+    func presentGame()
+    func presentLoss(with bleeps: [IndexPath])
+    func presentWin(with bleeps: [IndexPath])
     func presentScore(score: Int)
+    func toggleBleeps(at indexPaths: [IndexPath])
     func update(indexPaths: [IndexPath])
 }
 
 class GameInteractor: GameInteractable {
     
-    
-    
-    func onTryAgain() {
-        setupBoard()
-    }
-    
-    func toggleTryCheating() {
-        
-    }
-    
     // temporary values
-    private let columns = 15
-    private let rows = 30
+    private var columns: Int
+    private var rows: Int
+    private var numberOfBleeps: Int
+    private let bleepRatio: Double = 0.2
     //
     
     private let movement: Movement
     
     private var presenter: GamePresentable
-
     private var board: [[Bleepable]]
     private var bleepIndexPaths: [IndexPath]
     private var indicesToUpdate: [IndexPath]
-    private var numberOfBleeps: Int
     private var score: Int
     private var selections: Int
     private var openedCount: Int
+    private var isCheating: Bool = false
     private var cellCount: Int { board.count * board[0].count }
     private var openableCells: Int { cellCount - numberOfBleeps }
     private var winConditionMet: Bool { openedCount == openableCells }
+    private var percentComplete: Int { openedCount / openableCells }
     
     init(movement: Movement, presenter: GamePresentable) {
-        self.board = []
+        switch UIDevice.current.userInterfaceIdiom {
+//        case .carPlay:
+//            print(UIDevice.current.userInterfaceIdiom)
+        case .pad:
+            print(UIDevice.current.userInterfaceIdiom.rawValue)
+            columns = 35
+            rows = 25
+            numberOfBleeps = Int(floor(Double(columns * rows) * bleepRatio))
+        case .phone:
+            columns = 15
+            rows = 32
+            numberOfBleeps = Int(floor(Double(columns * rows) * bleepRatio))
+            print(UIDevice.current.userInterfaceIdiom.rawValue)
+//        case .tv:
+//            print(UIDevice.current.userInterfaceIdiom)
+//        case .unspecified:
+//            print(UIDevice.current.userInterfaceIdiom)
+        default:
+            columns = 0
+            rows = 0
+            numberOfBleeps = 0
+            break
+        }
+        
         self.bleepIndexPaths = []
         self.indicesToUpdate = []
+        self.board = []
         self.movement = movement
-        self.numberOfBleeps = 10
-        self.openedCount = 0
         self.presenter = presenter
+        self.openedCount = 0
         self.score = 0
         self.selections = 0
     }
@@ -72,16 +81,36 @@ class GameInteractor: GameInteractable {
     func onColumnCount() -> Int { board.count }
     func onRowCount() -> Int { board.first?.count ?? 0 }
     func onTileRequest(at indexPath: IndexPath) -> Bleepable { board[indexPath.section][indexPath.row] }
+    
+    
+    func onDidAppear() {
+        presenter.presentLogin()
+    }
+    
+    func onAppleLogin() {
+        
+    }
+    
+    func onGuestLogin() {
+        _ = movement.add { [weak self] in self?.onTic() }
+        presenter.presentGame()
+    }
 
     func onSelectIndex(at indexPath: IndexPath) {
         let row = indexPath.row
         let column = indexPath.section
         let cell = board[column][row]
         
+        if winConditionMet { return }
+        
         if cell.flagged { return }
         
+        if cell.surroundingBleeps != nil { return }
+        
+        if isCheating && cell.isBleep { return }
+
         if selections == 0 { firstSelection(at: indexPath) }
-                
+                        
         if cell.isBleep { lose(); return }
         else { open(column: column, row: row) }
         
@@ -101,28 +130,43 @@ class GameInteractor: GameInteractable {
             }
             board.append(thisColumn)
         }
-        
-//        update()
     }
     
     func onToggleFlag(at indexPath: IndexPath) {
         let row = indexPath.row
         let column = indexPath.section
+        guard board[column][row].surroundingBleeps == nil else { return }
         
         board[column][row].flagged = !board[column][row].flagged
         indicesToUpdate.append(indexPath)
         update()
     }
     
+    
+    func toggleTryCheating() {
+        isCheating = !isCheating
+        presenter.toggleBleeps(at: bleepIndexPaths)
+    }
+    
+    func onTryAgain() {
+        score = 0
+        openedCount = 0
+        selections = 0
+        movement.reset()
+        setupBoard()
+        update()
+        presenter.presentScore(score: score)
+    }
+    
     private func checkSurrounding(row: Int, column: Int) -> Int {
         var count = 0
         
         for x in -1...1 {
-            guard row + x < board.count, row + x >= 0 else { continue }
+            guard column + x < board.count, column + x >= 0 else { continue }
             for y in -1...1 {
-                guard column + y < board[row + x].count, column + y >= 0 else { continue }
-                guard (row + x, column + y) != (row, column) else { continue }
-                if board[row + x][column + y].isBleep { count += 1}
+                guard row + y < board[column + x].count, row + y >= 0 else { continue }
+                guard (column + x, row + y) != (column, row) else { continue }
+                if board[column + x][row + y].isBleep { count += 1}
             }
         }
         
@@ -130,9 +174,13 @@ class GameInteractor: GameInteractable {
     }
     
     private func firstSelection(at indexPath: IndexPath) {
-        _ = movement.add { [weak self] in self?.onTic() }
         movement.start()
         setupBleeps(numberOfBleeps: numberOfBleeps, excluding: indexPath)
+    }
+    
+    private func lose() {
+        presenter.presentLoss(with: bleepIndexPaths)
+        movement.reset()
     }
     
     private func open(column: Int, row: Int) {
@@ -151,7 +199,7 @@ class GameInteractor: GameInteractable {
                 guard row + y < board[column + x].count, row + y >= 0 else { continue }
                 guard (column + x, row + y) != (column, row) else { continue }
                 guard board[column + x][row + y].surroundingBleeps == nil else { continue }
-                open(column: column + y, row: row + x)
+                open(column: column + x, row: row + y)
             }
         }
     }
@@ -175,11 +223,15 @@ class GameInteractor: GameInteractable {
         
         bleepIndexPaths = Array(bleeps)
     }
-
+    
+    private func onTic() {
+        score += selections;
+        print(score)
+        presenter.presentScore(score: score)
+    }
+    
     private func error() { presenter.presentError() }
-    private func lose() { presenter.presentLoss() }
-    private func onTic() { score += 1; presenter.presentScore(score: score) }
-    private func win() { presenter.presentWin() }
+    private func win() { presenter.presentWin(with: bleepIndexPaths) }
     private func update() { presenter.update(indexPaths: indicesToUpdate); indicesToUpdate.removeAll() }
 
 }

@@ -256,9 +256,7 @@ class RootViewController: UIViewController {
         }
     }
     
-    private func setupViews() {
-        
-        
+    private func setupViews() {        
         let item = UINavigationItem()
            
         let left = UIButton(type: .custom)

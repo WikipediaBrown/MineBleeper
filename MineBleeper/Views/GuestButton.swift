@@ -9,10 +9,8 @@
 import UIKit
 
 class GuestButton: UIButton {
-
     override init(frame: CGRect) {
         super.init(frame: frame)
-        alpha = 0
         titleLabel?.font = UIFont.boldSystemFont(ofSize: UIFont.systemFontSize)
         setTitleColor(.white, for: .normal)
         setTitle("Play as 'Guest'", for: .normal)
@@ -23,5 +21,4 @@ class GuestButton: UIButton {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
 }

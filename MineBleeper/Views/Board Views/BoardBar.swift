@@ -9,14 +9,14 @@
 import UIKit
 
 class BoardBar: UINavigationBar {
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        alpha = 0
         tintColor = .white
+        barStyle = .black
         barTintColor = .black
         isTranslucent = false
-        titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.red]
+        titleTextAttributes = [.foregroundColor: UIColor.red,
+                               .font: UIFont.systemFont(ofSize: UIFont.buttonFontSize, weight: .black)]
         translatesAutoresizingMaskIntoConstraints = false
     }
     
@@ -24,5 +24,4 @@ class BoardBar: UINavigationBar {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }

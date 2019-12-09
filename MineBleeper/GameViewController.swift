@@ -8,12 +8,30 @@
 
 import UIKit
 
+
+protocol GameInteractable {
+    func onColumnCount() -> Int
+    func onRowCount() -> Int
+    func onSelectIndex(at indexPath: IndexPath)
+    func onToggleFlag(at indexPath: IndexPath)
+    func onTryAgain()
+    func toggleTryCheating()
+    func onAppleLogin()
+    func onGuestLogin()
+    func onDidAppear()
+}
+
 class GameViewController: UIViewController, GamePresentable {
+    
+    // MARK: - Public Properties
 
     weak var listener: GameInteractor?
     
     private let boardView = BoardView()
     private let navigationBar = BoardBar()
+    private let guestbutton = GuestButton()
+    private let rootLabel = RootLabel()
+
     
     private var statusBarShouldHide = true
     
@@ -25,29 +43,62 @@ class GameViewController: UIViewController, GamePresentable {
 
     // MARK: - Overriden Methods
     
-    override func viewDidLoad() { super.viewDidLoad(); setupViews() }
-
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        listener?.setupBoard()
-        boardView.setupGame(rows: listener?.onRowCount(), columns: listener?.onColumnCount())
-
+        setupLoginViews()
+        listener?.onDidAppear()
     }
     
     func presentError() {
         print("error")
     }
     
-    func presentLoss() {
-        print("lost")
+    func presentLogin() {
+        guestbutton.alpha = 0
+        guestbutton.addTarget(self, action: #selector(guestButtonTapped), for: .touchUpInside)
+        
+        view.addSubview(guestbutton)
+        
+        var screenHeight: CGFloat
+        switch UIDevice.current.userInterfaceIdiom {
+        case .pad: screenHeight = -UIScreen.main.bounds.height/2
+        case .phone: screenHeight = -UIScreen.main.bounds.height/4
+        default: screenHeight = 0
+        }
+        
+        NSLayoutConstraint.activate([
+            guestbutton.leftAnchor.constraint(equalTo: view.layoutMarginsGuide.leftAnchor),
+            guestbutton.rightAnchor.constraint(equalTo: view.layoutMarginsGuide.rightAnchor),
+            guestbutton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: screenHeight)
+        ])
+        
+        UIView.animate(withDuration: 1) { [weak self] in self?.guestbutton.alpha = 1 }
     }
     
-    func presentWin() {
-        print("won")
+    func presentGame() {
+        setupGameViews()
+    }
+    
+    func presentLoss(with bleeps: [IndexPath]) {
+        boardView.displayBleeps(at: bleeps, in: .red, withTextColor: .black)
+        present(getAlert(type: .lost), animated: true, completion: nil)
+    }
+    
+    func presentWin(with bleeps: [IndexPath]) {
+        boardView.displayBleeps(at: bleeps, in: .green, withTextColor: .white)
+        present(getAlert(type: .won), animated: true, completion: nil)
     }
     
     func presentScore(score: Int) {
-        print(score)
+        DispatchQueue.main.async { [weak self] in
+            let title: String
+            if score == 0 {
+                title = "!!!Bleep On!!!"
+            } else {
+                title = "Score: \(score)"
+            }
+            self?.navigationBar.topItem?.title = title
+        }        
     }
     
     func update(indexPaths: [IndexPath]) {
@@ -55,6 +106,15 @@ class GameViewController: UIViewController, GamePresentable {
             let tile = listener?.onTileRequest(at: indexPath)
             boardView.updateIndex(with: indexPath, with: tile)
         }
+    }
+    
+    func toggleBleeps(at indexPaths: [IndexPath]) {
+        boardView.toggleBleeps(at: indexPaths)
+    }
+    
+    @objc
+    func guestButtonTapped() {
+        listener?.onGuestLogin()
     }
     
     @objc
@@ -66,10 +126,58 @@ class GameViewController: UIViewController, GamePresentable {
     func cheatTapped() {
         listener?.toggleTryCheating()
     }
+    
+    @objc
+    func restart(action: UIAlertAction) {
+        tryAgainTapped()
+    }
+    
+    private func getAlert(type: Constants.AlertType) -> UIAlertController {
+        let title: String
+        let message: String
+        let action: UIAlertAction
         
-    private func setupViews() {
-        navigationBar.alpha = 1
+        switch type {
+        case .lost:
+            title = "Bleep Thiiiiis..."
+            message = "You've Lost... you shouldn't do that my dudes..."
+            action = UIAlertAction(title: "Try Again Loser", style: .destructive, handler: restart)
+        case .won:
+            title = "You did iiiiit..."
+            message = "yaaaay..."
+            action = UIAlertAction(title: "DO IT AGAIN", style: .destructive, handler: restart)
+        }
+         
+        let alert =  UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(action)
         
+        return alert
+    }
+    
+    private func setupLoginViews() {
+        statusBarShouldHide = !statusBarShouldHide
+        
+        view.addSubview(rootLabel)
+
+        NSLayoutConstraint.activate([
+            rootLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            rootLabel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            rootLabel.leftAnchor.constraint(equalTo: view.leftAnchor),
+            rootLabel.rightAnchor.constraint(equalTo: view.rightAnchor)
+        ])
+        
+        UIView.animate(withDuration: 2) { [weak self] in self?.setNeedsStatusBarAppearanceUpdate() }
+    }
+        
+    private func setupGameViews() {
+        
+        boardView.alpha = 0
+        boardView.listener = self
+        navigationBar.alpha = 0
+        
+        listener?.setupBoard()
+        boardView.setupGame(rows: listener?.onRowCount(), columns: listener?.onColumnCount())
+                
         let left = UIButton(type: .custom)
         let right = UIButton(type: .custom)
         let tryAgain = UIBarButtonItem(customView: left)
@@ -89,11 +197,16 @@ class GameViewController: UIViewController, GamePresentable {
         right.addTarget(self, action: #selector(cheatTapped), for: .touchUpInside)
         right.titleLabel?.font = UIFont.systemFont(ofSize: UIFont.labelFontSize, weight: UIFont.Weight.black)
 
-        item.setLeftBarButton(tryAgain, animated: true)
-        item.setRightBarButton(cheat, animated: true)
+        item.setLeftBarButton(tryAgain, animated: false)
+        item.setRightBarButton(cheat, animated: false)
+        item.prompt = "WELCOME TO THE THUNDER DEEZY BREEZY"
+        item.title = "!!!Rock On!!!"
+        
+        navigationBar.pushItem(item, animated: false)
+        statusBarShouldHide = false
 
-        view.addSubview(boardView)
         view.addSubview(navigationBar)
+        view.addSubview(boardView)
 
         NSLayoutConstraint.activate([
             navigationBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -108,7 +221,27 @@ class GameViewController: UIViewController, GamePresentable {
             boardView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor)
         ])
         
-        navigationBar.pushItem(item, animated: true)
-        statusBarShouldHide = false
+        UIView.animate(withDuration: 1, animations: { [weak self] in
+            self?.rootLabel.alpha = 0
+            self?.guestbutton.alpha = 0
+        }) { [weak self] (complete) in
+            self?.rootLabel.removeFromSuperview()
+            self?.guestbutton.removeFromSuperview()
+            UIView.animate(withDuration: 2) { [weak self] in self?.boardView.alpha = 1 }
+            UIView.animate(withDuration: 3) { [weak self] in self?.navigationBar.alpha = 1 }
+        }
+    }
+}
+
+extension GameViewController: BoardViewListening {
+    func numberOfColumns() -> Int { listener?.onColumnCount() ?? 0 }
+    func numberOfRows() -> Int { listener?.onRowCount() ?? 0 }
+    
+    func viewTapped(at column: Int, and row: Int) {
+        listener?.onSelectIndex(at: IndexPath(row: row, section: column))
+    }
+    
+    func viewLongPressed(at column: Int, and row: Int) {
+        listener?.onToggleFlag(at: IndexPath(row: row, section: column))
     }
 }
