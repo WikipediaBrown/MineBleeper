@@ -8,7 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		5B0B361A239CE75A00023F80 /* BoardBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0B3619239CE75A00023F80 /* BoardBar.swift */; };
-		5B0B361E239E47F200023F80 /* WinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0B361D239E47F200023F80 /* WinView.swift */; };
+		5B0B361E239E47F200023F80 /* CompletionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0B361D239E47F200023F80 /* CompletionView.swift */; };
+		5B0B3620239E73DA00023F80 /* Enumerations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0B361F239E73DA00023F80 /* Enumerations.swift */; };
 		5B3E492D239C787700525BC6 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3E492C239C787700525BC6 /* GameViewController.swift */; };
 		5B3E732B2375438C005FA313 /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3E732A2375438C005FA313 /* BoardView.swift */; };
 		5B3E73322375556B005FA313 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3E73312375556B005FA313 /* Constants.swift */; };
@@ -48,7 +49,8 @@
 
 /* Begin PBXFileReference section */
 		5B0B3619239CE75A00023F80 /* BoardBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardBar.swift; sourceTree = "<group>"; };
-		5B0B361D239E47F200023F80 /* WinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinView.swift; sourceTree = "<group>"; };
+		5B0B361D239E47F200023F80 /* CompletionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletionView.swift; sourceTree = "<group>"; };
+		5B0B361F239E73DA00023F80 /* Enumerations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enumerations.swift; sourceTree = "<group>"; };
 		5B3E492C239C787700525BC6 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		5B3E732A2375438C005FA313 /* BoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
 		5B3E73312375556B005FA313 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -117,7 +119,7 @@
 				5B95C35D23764C6700539396 /* RootLabel.swift */,
 				5BB6A79C2379549900A97716 /* GuestButton.swift */,
 				5B8762B12386387700E2F97A /* Scoreboard.swift */,
-				5B0B361D239E47F200023F80 /* WinView.swift */,
+				5B0B361D239E47F200023F80 /* CompletionView.swift */,
 				5B3E4932239C79F100525BC6 /* Board Views */,
 			);
 			path = Views;
@@ -154,6 +156,7 @@
 				5B3E73312375556B005FA313 /* Constants.swift */,
 				5BB6A79823791EC200A97716 /* Movement.swift */,
 				5B8762B52391CC4C00E2F97A /* Tile.swift */,
+				5B0B361F239E73DA00023F80 /* Enumerations.swift */,
 				5B3E732C23755215005FA313 /* Views */,
 				5BF14CE32375007900387859 /* Assets.xcassets */,
 				5BF14CE52375007900387859 /* LaunchScreen.storyboard */,
@@ -316,13 +319,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5B0B361E239E47F200023F80 /* WinView.swift in Sources */,
+				5B0B361E239E47F200023F80 /* CompletionView.swift in Sources */,
 				5B3E492D239C787700525BC6 /* GameViewController.swift in Sources */,
 				5B8762B42391CAE100E2F97A /* GameInteractor.swift in Sources */,
 				5BF14CDF2375007700387859 /* RootViewController.swift in Sources */,
 				5BF14D0B2375067800387859 /* Cell.swift in Sources */,
 				5BB6A79923791EC300A97716 /* Movement.swift in Sources */,
 				5BF14CDB2375007700387859 /* AppDelegate.swift in Sources */,
+				5B0B3620239E73DA00023F80 /* Enumerations.swift in Sources */,
 				5B8762B62391CC4C00E2F97A /* Tile.swift in Sources */,
 				5BB6A79D2379549900A97716 /* GuestButton.swift in Sources */,
 				5B3E732B2375438C005FA313 /* BoardView.swift in Sources */,

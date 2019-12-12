@@ -135,11 +135,11 @@ class RootViewController: UIViewController {
     }
     
     func lose() {
-        present(getAlert(type: .lost), animated: true, completion: nil)
+//        present(getAlert(type: .lost), animated: true, completion: nil)
     }
     
     func win() {
-        present(getAlert(type: .won), animated: true, completion: nil)
+//        present(getAlert(type: .won), animated: true, completion: nil)
     }
     
     // MARK: - Private Methods
@@ -157,28 +157,28 @@ class RootViewController: UIViewController {
         }
         return bleepCount
     }
-    
-    private func getAlert(type: Constants.AlertType) -> UIAlertController {
-        let title: String
-        let message: String
-        let action: UIAlertAction
-        
-        switch type {
-        case .lost:
-            title = "Bleep Thiiiiis..."
-            message = "You've Lost... you shouldn't do that my dudes..."
-            action = UIAlertAction(title: "Try Again Loser", style: .destructive, handler: restart)
-        case .won:
-            title = "You did iiiiit..."
-            message = "yaaaay..."
-            action = UIAlertAction(title: "DO IT AGAIN", style: .destructive, handler: restart)
-        }
-         
-        let alert =  UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(action)
-        
-        return alert
-    }
+//
+//    private func getAlert(type: Constants.AlertType) -> UIAlertController {
+//        let title: String
+//        let message: String
+//        let action: UIAlertAction
+//
+//        switch type {
+//        case .lost:
+//            title = "Bleep Thiiiiis..."
+//            message = "You've Lost... you shouldn't do that my dudes..."
+//            action = UIAlertAction(title: "Try Again Loser", style: .destructive, handler: restart)
+//        case .won:
+//            title = "You did iiiiit..."
+//            message = "yaaaay..."
+//            action = UIAlertAction(title: "DO IT AGAIN", style: .destructive, handler: restart)
+//        }
+//
+//        let alert =  UIAlertController(title: title, message: message, preferredStyle: .alert)
+//        alert.addAction(action)
+//
+//        return alert
+//    }
     
     private func getCell(row: Int, column: Int) -> Cell {
         let cell = Cell(row: row, column: column)

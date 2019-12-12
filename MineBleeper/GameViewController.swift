@@ -31,6 +31,8 @@ class GameViewController: UIViewController, GamePresentable {
     private let navigationBar = BoardBar()
     private let guestbutton = GuestButton()
     private let rootLabel = RootLabel()
+    private let alert = CompletionView()
+
 
     
     private var statusBarShouldHide = true
@@ -46,7 +48,7 @@ class GameViewController: UIViewController, GamePresentable {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setupLoginViews()
-        listener?.onDidAppear()
+//        listener?.onDidAppear()
     }
     
     func presentError() {
@@ -79,14 +81,42 @@ class GameViewController: UIViewController, GamePresentable {
         setupGameViews()
     }
     
-    func presentLoss(with bleeps: [IndexPath]) {
-        boardView.displayBleeps(at: bleeps, in: .red, withTextColor: .black)
-        present(getAlert(type: .lost), animated: true, completion: nil)
+    func presentResult(with  bleeps: [IndexPath], and gameState: GameState) {
+        let backgroundColor: UIColor
+        let textColor: UIColor
+        
+        switch gameState {
+        case .lost: backgroundColor = .red; textColor = .black
+        case .won: backgroundColor = Constants.Colors.successGreen; textColor = .white
+        default: backgroundColor = .blue; textColor = .white
+        }
+        
+        boardView.displayBleeps(at: bleeps, in: backgroundColor, withTextColor: textColor)
+        showCompletion(gameState: gameState)
     }
     
-    func presentWin(with bleeps: [IndexPath]) {
-        boardView.displayBleeps(at: bleeps, in: .green, withTextColor: .white)
-        present(getAlert(type: .won), animated: true, completion: nil)
+    func showCompletion(gameState: GameState) {
+        
+        alert.setState(with: gameState)
+        alert.center.x = view.center.x
+        alert.center.y = view.frame.height + (alert.frame.height / 2)
+        
+        view.addSubview(alert)
+        
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: { [weak self] in
+            self?.alert.center = self?.view.center ?? .zero
+        }) { (complete) in
+        }
+        
+    }
+    
+    func dismissCompletion() {
+        let center = view.frame.height + (alert.frame.height / 2)
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: { [weak self] in
+            self?.alert.center.y = center
+        }) { [weak self] (complete) in
+            self?.alert.removeFromSuperview()
+        }
     }
     
     func presentScore(score: Int) {
@@ -130,28 +160,6 @@ class GameViewController: UIViewController, GamePresentable {
     @objc
     func restart(action: UIAlertAction) {
         tryAgainTapped()
-    }
-    
-    private func getAlert(type: Constants.AlertType) -> UIAlertController {
-        let title: String
-        let message: String
-        let action: UIAlertAction
-        
-        switch type {
-        case .lost:
-            title = "Bleep Thiiiiis..."
-            message = "You've Lost... you shouldn't do that my dudes..."
-            action = UIAlertAction(title: "Try Again Loser", style: .destructive, handler: restart)
-        case .won:
-            title = "You did iiiiit..."
-            message = "yaaaay..."
-            action = UIAlertAction(title: "DO IT AGAIN", style: .destructive, handler: restart)
-        }
-         
-        let alert =  UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(action)
-        
-        return alert
     }
     
     private func setupLoginViews() {
@@ -200,7 +208,7 @@ class GameViewController: UIViewController, GamePresentable {
         item.setLeftBarButton(tryAgain, animated: false)
         item.setRightBarButton(cheat, animated: false)
         item.prompt = "WELCOME TO THE THUNDER DEEZY BREEZY"
-        item.title = "!!!Rock On!!!"
+        item.title = "!!!Bleep On!!!"
         
         navigationBar.pushItem(item, animated: false)
         statusBarShouldHide = false
@@ -211,7 +219,8 @@ class GameViewController: UIViewController, GamePresentable {
         NSLayoutConstraint.activate([
             navigationBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             navigationBar.leftAnchor.constraint(equalTo: view.leftAnchor),
-            navigationBar.rightAnchor.constraint(equalTo: view.rightAnchor)
+            navigationBar.rightAnchor.constraint(equalTo: view.rightAnchor),
+            navigationBar.heightAnchor.constraint(equalToConstant: 78)
         ])
 
         NSLayoutConstraint.activate([
