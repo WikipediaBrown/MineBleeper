@@ -11,7 +11,7 @@
 #
 
 # Uncomment the line if you want fastlane to automatically update itself
-# update_fastlane
+update_fastlane
 
 default_platform(:ios)
 
@@ -22,7 +22,8 @@ platform :ios do
     build_for_apple_distribution
     pilot(
       ipa: "./fastlane/apple_build/#{ENV["PRODUCE_APP_NAME"]}.ipa",
-      skip_waiting_for_build_processing: false,
+      skip_waiting_for_build_processing: false,,
+      beta_app_description: "#{ENV["PRODUCE_APP_NAME"]} #{ENV["PILOT_APP_DESCRIPTION"]}"
       changelog: "Version {lane_context[SharedValues: VERSION_NUMBER]}, Build {lane_context[SharedValues: BUILD_NUMBER]}"
     )
   end
@@ -30,10 +31,10 @@ platform :ios do
   desc "Build #{ENV["PRODUCE_APP_NAME"]} for TestFlight & AppStore"
   lane :build_for_apple_distribution do
     produce
-    # unit_test
-    # ui_test
     deliver # Updating Metadata
     precheck
+    unit_test
+    ui_test
     # create_screenshots
     match_with_options(type: "appstore")
     increment_build_number(build_number: Time.now.to_i)
@@ -49,11 +50,11 @@ platform :ios do
     match(type: matchType, readonly: false)
   end
 
-  # desc "Create and Frame #{ENV["PRODUCE_APP_NAME"]} Screenshots."
-  # lane :create_screenshots do
-  #   snapshot
-  #   frameit(path: "./docs", rose_gold: true)
-  # end
+  desc "Create and Frame #{ENV["PRODUCE_APP_NAME"]} Screenshots."
+  lane :create_screenshots do
+    snapshot
+    frameit(path: "./docs", rose_gold: true)
+  end
 
   desc "#{ENV["PRODUCE_APP_NAME"]} Unit Tests."
   lane :unit_test do

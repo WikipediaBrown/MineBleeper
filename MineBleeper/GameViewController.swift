@@ -48,7 +48,7 @@ class GameViewController: UIViewController, GamePresentable {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setupLoginViews()
-//        listener?.onDidAppear()
+        listener?.onDidAppear()
     }
     
     func presentError() {
