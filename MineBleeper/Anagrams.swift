@@ -152,86 +152,124 @@ class Trie {
     
     func checkAnagramExists(word: String) {
         let wordTracker = WordTracker(word: word)
-        var currentNode = rootNode
-         
+        var nodesToCheck = rootNode.children.values
+
+        var includedWords: [String] = []
+        let wordExists: Bool
+        var wordsIncludedIn: [String]? = nil
         
-        
-        
+        for node in nodesToCheck {
+            
+            
+            
+            
+            
+        }
+
     }
     
-    func test(wordTracker: WordTracker, node: Node) {
+    func test(wordTracker: WordTracker,
+              node: Node,
+              includedWords: [(string: String, count: Int)] = [],
+              anagrams: [(string: String, count: Int)] = [],
+              furtherWords: [String] = [])
+        -> ([(string: String, count: Int)], [(string: String, count: Int)], [String]) {
+            
+            guard wordTracker.exhausted == false else {
+                    var _anagrams = anagrams
+                    var _furtherWords = furtherWords
+                    
+                    if let word = node.word {_anagrams.append(word)}
+                    
+                    _furtherWords.append(contentsOf: node.furtherWords)
+                    return (includedWords, _anagrams, _furtherWords)
+            }
+            
+            guard wordTracker.checkCharacter(character: node.value) == true else { return (includedWords, [], []) }
+            
+            var _includedWords = includedWords
+            if let word = node.word {_includedWords.append(word)}
+            //        var _includedWords: [String] = includedWords
+            //        let _anagrams: [String] = anagrams
+            
+            //        if let string = node.word
+            
+            //        for child in node.children {
+            //            return test(wordTracker: wordTracker, node: child.value)
+            //        }
         
+        return ([], [], [])
     }
     
     
 }
-
-
-
-class easy {
-    class Node {
-        let value: Character
-        var children: [Character: Node]
-        var words: [String]
-        
-        
-        init(value: Character) {
-            self.value = value
-            self.children = [:]
-            self.words = []
-        }
-    }
-    
-    class trie {
-        private var rootNode: Node = Node(value: "*")
-
-        func addWord(word: String) {
-            let characters: [Character] = Array(word).sorted()
-            var currentNode = rootNode
-            
-            for character in characters {
-                if let node = currentNode.children[character] {
-                    currentNode = node
-                } else {
-                    let node = Node(value: character)
-                    currentNode.children[character] = node
-                    currentNode = node
-                }
-            }
-            currentNode.words.append(word)
-        }
-        
-        func removeWord(word: String) {
-            
-            let characters: [Character] = Array(word).sorted()
-            var currentNode = rootNode
-            
-            for character in characters {
-                if let node = currentNode.children[character] {
-                    currentNode = node
-                } else {
-                    return
-                }
-            }
-            
-            currentNode.words = currentNode.words.filter {$0 == word}
-        }
-        
-        func checkAnagram(word: String) -> [String] {
-            let characters: [Character] = Array(word).sorted()
-            var currentNode = rootNode
-            
-            for character in characters {
-                if let node = currentNode.children[character] {
-                    currentNode = node
-                } else {
-                    return []
-                }
-            }
-            
-            return currentNode.words
-        }
-        
-        
-    }
-}
+//
+//
+//
+//class easy {
+//    class Node {
+//        let value: Character
+//        var children: [Character: Node]
+//        var words: [String]
+//
+//
+//        init(value: Character) {
+//            self.value = value
+//            self.children = [:]
+//            self.words = []
+//        }
+//    }
+//
+//    class trie {
+//        private var rootNode: Node = Node(value: "*")
+//
+//        func addWord(word: String) {
+//            let characters: [Character] = Array(word).sorted()
+//            var currentNode = rootNode
+//
+//            for character in characters {
+//                if let node = currentNode.children[character] {
+//                    currentNode = node
+//                } else {
+//                    let node = Node(value: character)
+//                    currentNode.children[character] = node
+//                    currentNode = node
+//                }
+//            }
+//            currentNode.words.append(word)
+//        }
+//
+//        func removeWord(word: String) {
+//
+//            let characters: [Character] = Array(word).sorted()
+//            var currentNode = rootNode
+//
+//            for character in characters {
+//                if let node = currentNode.children[character] {
+//                    currentNode = node
+//                } else {
+//                    return
+//                }
+//            }
+//
+//            currentNode.words = currentNode.words.filter {$0 == word}
+//        }
+//
+//        func checkAnagram(word: String) -> [String] {
+//            let characters: [Character] = Array(word).sorted()
+//            var currentNode = rootNode
+//
+//            for character in characters {
+//                if let node = currentNode.children[character] {
+//                    currentNode = node
+//                } else {
+//                    return []
+//                }
+//            }
+//
+//            return currentNode.words
+//        }
+//
+//
+//    }
+//}

@@ -22,8 +22,9 @@ platform :ios do
     build_for_apple_distribution
     pilot(
       ipa: "./fastlane/apple_build/#{ENV["PRODUCE_APP_NAME"]}.ipa",
-      skip_waiting_for_build_processing: false,,
-      beta_app_description: "#{ENV["PRODUCE_APP_NAME"]} #{ENV["PILOT_APP_DESCRIPTION"]}"
+      skip_waiting_for_build_processing: false,
+      beta_app_description: "#{ENV["PILOT_APP_DESCRIPTION"]}",
+      beta_app_feedback_email: "",
       changelog: "Version {lane_context[SharedValues: VERSION_NUMBER]}, Build {lane_context[SharedValues: BUILD_NUMBER]}"
     )
   end
