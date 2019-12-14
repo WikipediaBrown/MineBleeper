@@ -69,7 +69,7 @@ add_file ./_layouts post.html "$POST_LAYOUT" 'Post Layout'
 
 # Adding First Post
 POST_CONTENT="---\r\nlayout: post\r\ncontributor: Admin\r\n---\r\n\r\n$APP_NAME\'s blog is coming soon to an RSS reader near you.\r\n"
-add_file ./_posts "$(date +%%F)-ComingSoon.md" "$POST_CONTENT" 'Post Content'
+add_file ./_posts "$(date +%F)-ComingSoon.md" "$POST_CONTENT" 'Post Content'
 
 # Adding SASS
 SASS=".current {\r\n    color: green;\r\n}"
