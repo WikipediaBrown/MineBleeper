@@ -31,7 +31,7 @@ grep -Fxq "$JEKYLL" Gemfile || { printf -- "$JEKYLL\n\n" >> Gemfile; echo 'Added
 JEKYLL_PLUGINS="group :jekyll_plugins do\n    gem \'jekyll-sitemap\'\n    gem \'jekyll-feed\'\n    gem \'jekyll-seo-tag\'\nend"
 grep -Fxq $"group :jekyll_plugins do" Gemfile || { printf "$JEKYLL_PLUGINS\n\n" >> Gemfile; echo 'Added Jekyll Dependencies...';}
 
-# INstalling Dependencies
+# Installing Dependencies
 bundle --quiet
 
 # Adding Support Files
@@ -62,11 +62,11 @@ ABOUT_MD="---\r\ntitle: About\r\n---\r\n# About page\r\n\r\nThis page tells you 
 add_file . about.md "$ABOUT_MD" 'About'
 
 # Adding Blog File
-BLOG_HTML="---\r\ntitle: Blog\r\n---\r\n<h1>Latest Posts</h1>\r\n\r\n<ul>\r\n  {%% for post in site.posts %%}\r\n    <li>\r\n      <h2><a href=\"{{ post.url }}\">{{ post.title }}</a></h2>\r\n      <p>{{ post.excerpt }}</p>\r\n    </li>\r\n  {%% endfor %%}\r\n</ul>"
+BLOG_HTML="---\r\ntitle: Blog\r\n---\r\n<h1>Latest Posts</h1>\r\n\r\n<ul>\r\n  {%% for post in site.posts %%}\r\n    <li>\r\n      <h2><a href=\"{{ post.url | relative_url }}\">{{ post.title }}</a></h2>\r\n      <p>{{ post.excerpt }}</p>\r\n    </li>\r\n  {%% endfor %%}\r\n</ul>"
 add_file . blog.html "$BLOG_HTML" 'Blog'
 
 # Adding Contributors File
-CONTRIBUTORS_HTML="---\r\ntitle: Contributors\r\n---\r\n<h1>Contributors</h1>\r\n\r\n<ul>\r\n  {%% for contributor in site.contributors %%}\r\n    <li>\r\n      <h2><a href=\"{{ contributor.url }}\">{{ contributor.name }}</a></h2>\r\n      <h3>{{ contributor.position }}</h3>\r\n      <p>{{ contributor.content | markdownify }}</p>\r\n    </li>\r\n  {%% endfor %%}\r\n</ul>"
+CONTRIBUTORS_HTML="---\r\ntitle: Contributors\r\n---\r\n<h1>Contributors</h1>\r\n\r\n<ul>\r\n  {%% for contributor in site.contributors %%}\r\n    <li>\r\n      <h2><a href=\"{{ contributor.url | relative_url}}\">{{ contributor.name }}</a></h2>\r\n      <h3>{{ contributor.position }}</h3>\r\n      <p>{{ contributor.content | markdownify }}</p>\r\n    </li>\r\n  {%% endfor %%}\r\n</ul>"
 add_file . contributors.html "$CONTRIBUTORS_HTML" 'Contributors'
 
 # Adding Index File

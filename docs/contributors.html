@@ -6,7 +6,7 @@ title: Contributors
 <ul>
   {% for contributor in site.contributors %}
     <li>
-      <h2><a href="{{ contributor.url }}">{{ contributor.name }}</a></h2>
+      <h2><a href="{{ contributor.url | relative_url}}">{{ contributor.name }}</a></h2>
       <h3>{{ contributor.position }}</h3>
       <p>{{ contributor.content | markdownify }}</p>
     </li>
