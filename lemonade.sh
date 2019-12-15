@@ -117,3 +117,14 @@ sed -i '' "s/ZZZZZZZZZZ/$USER/g" privacy_policy.md
 # Build Site
 bundle exec jekyll build 
 
+printf "{" >  lemonade.json
+printf "" >> lemonade.json
+printf "" >> lemonade.json
+printf "privacyPolicyPath: \"/$APP_NAME/privacy_policy.html\" }" >> lemonade.json
+
+
+https://wikipediabrown.github.io
+
+"/$APP_NAME/privacy_policy.html"
+
+/MineBleeper/privacy_policy.html
