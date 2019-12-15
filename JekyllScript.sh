@@ -1,8 +1,9 @@
 #!/bin/bash
 # 
-# initial values needed to build Jekyll site
+# Initial values needed to build Jekyll site
 APP_NAME=${PWD##*/}
 JEKYLL_DIRECTORY=docs
+
 
 # Function List
 # If file does not exists, create it and add its content
@@ -34,6 +35,7 @@ grep -Fxq $"group :jekyll_plugins do" Gemfile || { printf "$JEKYLL_PLUGINS\n\n" 
 # Installing Dependencies
 bundle --quiet
 
+
 # Adding Support Files
 # Adding Configuration File
 CONFIG_YAML="baseurl: /$APP_NAME\r\n\r\ncollections:\r\n  contributors:\r\n    output: true\r\n\r\ndefaults:\r\n  - scope:\r\n      path: \"\"\r\n      type: \"contributors\"\r\n    values:\r\n      layout: \"contributor\"\r\n  - scope:\r\n      path: \"\"\r\n      type: \"posts\"\r\n    values:\r\n      layout: \"post\"\r\n  - scope:\r\n      path: \"\"\r\n    values:\r\n      layout: \"default\"\r\n\r\nplugins:\r\n  - jekyll-feed\r\n  - jekyll-sitemap\r\n  - jekyll-seo-tag\r\n"
@@ -47,6 +49,7 @@ add_file ./_data navigation.yml "$NAVIGATION_DATA" 'Navigation Data'
 NAVIGATION_HTML="<nav>\r\n    {%% for item in site.data.navigation %%}\r\n        <a href=\"{{ item.link }}\" {%% if page.url == item.link %%}class=\"current\"{%% endif %%}>{{ item.name }}</a>\r\n    {%% endfor %%}\r\n</nav>\r\n"
 add_file ./_includes navigation.html "$NAVIGATION_HTML" 'Navigation HTML'
 
+
 #Adding Content Files
 # Adding Initial Contributor
 ADMIN_HTML="---\r\nname: Admin\r\nposition: Administrator\r\n---\r\n{{ page.name }} the {{ page.position }} is the creator and administrator of $APP_NAME.\r\n"
@@ -55,6 +58,7 @@ add_file ./_contributors Admin.md "$ADMIN_HTML" 'Contributors'
 # Adding First Post
 POST_CONTENT="---\r\nlayout: post\r\ncontributor: Admin\r\n---\r\n\r\n$APP_NAME\'s blog is coming soon to an RSS reader near you.\r\n"
 add_file ./_posts "$(date +%F)-ComingSoon.md" "$POST_CONTENT" 'Post Content'
+
 
 # Adding Page Files
 # Adding About File
@@ -73,9 +77,10 @@ add_file . contributors.html "$CONTRIBUTORS_HTML" 'Contributors'
 INDEX_HTML="---\r\ntitle: Home\r\n---\r\n<h1>$APP_NAME</h1>\r\n\r\n<p>It's the app for that!</p>"
 add_file . index.html "$INDEX_HTML" 'Index'
 
+
 # Adding Layouts
 # Adding Contributor Layout
-CONTRIBUTOR_LAYOUT="---\r\nlayout: default\r\n---\r\n<h1>{{ page.name }}</h1>\r\n<h2>{{ page.position }}</h2>\r\n\r\n{{ content }}\r\n\r\n<h2>Posts</h2>\r\n<ul>\r\n  {%% assign filtered_posts = site.posts | where: \'contributor\', page.name %%}\r\n  {%% for post in filtered_posts %%}\r\n    <li><a href=\"{{ post.url }}\">{{ post.title }}</a></li>\r\n  {%% endfor %%}\r\n</ul>"
+CONTRIBUTOR_LAYOUT="---\r\nlayout: default\r\n---\r\n<h1>{{ page.name }}</h1>\r\n<h2>{{ page.position }}</h2>\r\n\r\n{{ content }}\r\n\r\n<h2>Posts</h2>\r\n<ul>\r\n  {%% assign filtered_posts = site.posts | where: \'contributor\', page.name %%}\r\n  {%% for post in filtered_posts %%}\r\n    <li><a href=\"{{ site.baseurl }}{{ post.url }}\">{{ post.title }}</a></li>\r\n  {%% endfor %%}\r\n</ul>"
 add_file ./_layouts contributor.html "$CONTRIBUTOR_LAYOUT" 'Contributor Layout'
 
 # Adding Default Layout
@@ -83,8 +88,9 @@ DEFAULT_LAYOUT="<!doctype html>\r\n<html>\r\n  <head>\r\n    <meta charset=\"utf
 add_file ./_layouts default.html "$DEFAULT_LAYOUT" 'Default Layout'
 
 # Adding Post Layout
-POST_LAYOUT="---\r\nlayout: default\r\n---\r\n<h1>{{ page.title }}</h1>\r\n<p>\r\n    Written by {{ page.contributor }} on {{ page.date | date_to_string }} \r\n    {%% assign contributor = site.contributors | where: \'name\', page.contributor %%}\r\n    {%% if contributor %%}\r\n        <a href=\"{{ contributor.url }}\">{{ contributor.name }}</a>\r\n    {%% endif %%}\r\n</p>\r\n\r\n{{ content }}\r\n"
+POST_LAYOUT="---\r\nlayout: default\r\n---\r\n<h1>{{ page.title }}</h1>\r\n<p>\r\n    Written by {{ page.contributor }} on {{ page.date | date_to_string }} \r\n    {%% assign contributor = site.contributors | where: \'name\', page.contributor %%}\r\n    {%% if contributor %%}\r\n        <a href=\"{{ site.baseurl }}{{ contributor.url }}\">{{ contributor.name }}</a>\r\n    {%% endif %%}\r\n</p>\r\n\r\n{{ content }}\r\n"
 add_file ./_layouts post.html "$POST_LAYOUT" 'Post Layout'
+
 
 # Adding Styles Sheets
 # Adding CSS
@@ -95,4 +101,5 @@ add_file ./assets/css styles.scss "$CSS" 'CSS'
 SASS=".current {\r\n    color: green;\r\n}"
 add_file ./_sass main.scss "$SASS" 'SASS'
 
+# Build Site
 bundle exec jekyll build
