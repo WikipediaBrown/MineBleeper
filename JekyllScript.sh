@@ -92,7 +92,7 @@ DEFAULT_LAYOUT="<!doctype html>\r\n<html>\r\n  <head>\r\n    <meta charset=\"utf
 add_file ./_layouts default.html "$DEFAULT_LAYOUT" 'Default Layout'
 
 # Adding Post Layout
-POST_LAYOUT="---\r\nlayout: default\r\n---\r\n<h1>{{ page.title }}</h1>\r\n<p>\r\n    Written by {{ page.contributor }} on {{ page.date | date_to_string }} \r\n    {%% assign contributor = site.contributors | where: \'name\', page.contributor %%}\r\n    {%% if contributor %%}\r\n        <a href=\"{{ site.baseurl }}{{ contributor.url }}\">{{ contributor.name }}</a>\r\n    {%% endif %%}\r\n</p>\r\n\r\n{{ content }}\r\n"
+POST_LAYOUT="---\r\nlayout: default\r\n---\r\n<h1>{{ page.title }}</h1>\r\n<p>\r\n    Written by {{ page.contributor }} on {{ page.date | date_to_string }} \r\n    {%% assign contributor = site.contributors | where: \'name\', page.contributor | first %%}\r\n    {%% if contributor %%}\r\n        <a href=\"{{ site.baseurl }}{{ contributor.url }}\">{{ contributor.name }}</a>\r\n    {%% endif %%}\r\n</p>\r\n\r\n{{ content }}\r\n"
 add_file ./_layouts post.html "$POST_LAYOUT" 'Post Layout'
 
 
