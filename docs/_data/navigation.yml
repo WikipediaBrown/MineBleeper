@@ -1,0 +1,10 @@
+- name: Home
+  link: /MineBleeper/index.html
+- name: About
+  link: /MineBleeper/about.html
+- name: Privacy Policy
+  link: /MineBleeper/privacy_policy.html
+- name: Blog
+  link: /MineBleeper/blog.html
+- name: Contributors
+  link: /MineBleeper/contributors.html
