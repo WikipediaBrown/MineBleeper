@@ -1,3 +1,5 @@
+baseurl: /MineBleeper
+
 collections:
   contributors:
     output: true

@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
-<loc>/contributors/Admin.html</loc>
-<lastmod>2019-12-14T10:24:32-08:00</lastmod>
+<loc>/MineBleeper/contributors/Admin.html</loc>
+<lastmod>2019-12-14T17:35:24-08:00</lastmod>
 </url>
 <url>
-<loc>/2019/12/14/ComingSoon.html</loc>
+<loc>/MineBleeper/2019/12/14/ComingSoon.html</loc>
 <lastmod>2019-12-14T00:00:00-08:00</lastmod>
 </url>
 <url>
-<loc>/about.html</loc>
+<loc>/MineBleeper/about.html</loc>
 </url>
 <url>
-<loc>/blog.html</loc>
+<loc>/MineBleeper/blog.html</loc>
 </url>
 <url>
-<loc>/contributors.html</loc>
+<loc>/MineBleeper/contributors.html</loc>
 </url>
 <url>
-<loc>/</loc>
+<loc>/MineBleeper/</loc>
 </url>
 </urlset>
