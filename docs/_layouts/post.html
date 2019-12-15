@@ -3,10 +3,9 @@ layout: default
 ---
 <h1>{{ page.title }}</h1>
 <p>
-    Written by {{ page.contributor }} on {{ page.date | date_to_string }} 
     {% assign contributor = site.contributors | where: 'name', page.contributor | first %}
     {% if contributor %}
-        <a href="{{ site.baseurl }}{{ contributor.url }}">{{ contributor.name }}</a>
+       Written by <a href="{{ site.baseurl }}{{ contributor.url }}">{{ contributor.name }}</a> on {{ page.date | date_to_string }}
     {% endif %}
 </p>
 
