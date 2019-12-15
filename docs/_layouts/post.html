@@ -5,7 +5,7 @@ layout: default
 <p>
     {% assign contributor = site.contributors | where: 'name', page.contributor | first %}
     {% if contributor %}
-       Written by <a href="{{ site.baseurl }}{{ contributor.url }}">{{ contributor.name }}</a> on {{ page.date | date_to_string: 'ordinal', 'US' }}
+       Written by <a href="{{ site.baseurl }}{{ contributor.url }}">{{ contributor.name }}</a> on {{ page.date | date_to_string: "ordinal", "US" }}
     {% endif %}
 </p>
 
