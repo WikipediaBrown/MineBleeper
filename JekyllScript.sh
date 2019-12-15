@@ -53,7 +53,11 @@ add_file ./_includes navigation.html "$NAVIGATION_HTML" 'Navigation HTML'
 #Adding Content Files
 # Adding Initial Contributor
 ADMIN_HTML="---\r\nname: Admin\r\nposition: Administrator\r\n---\r\n{{ page.name }} the {{ page.position }} is the creator and administrator of $APP_NAME.\r\n"
-add_file ./_contributors Admin.md "$ADMIN_HTML" 'Contributors'
+add_file ./_contributors admin.md "$ADMIN_HTML" 'Contributors'
+
+# Adding Secondary Contributor
+ASSISTANT_HTML="---\r\nname: Assistant\r\nposition: Assistant\r\n---\r\n{{ page.name }} the {{ page.position }} is the Assistant to the administrator of $APP_NAME.\r\n"
+add_file ./_contributors assistant.md "$ASSISTANT_HTML" 'Contributors'
 
 # Adding First Post
 POST_CONTENT="---\r\nlayout: post\r\ncontributor: Admin\r\n---\r\n\r\n$APP_NAME\'s blog is coming soon to an RSS reader near you.\r\n"
@@ -109,6 +113,7 @@ curl -s https://raw.githubusercontent.com/WikipediaBrown/PrivacyPolicy-And-Terms
 sed -i '' "s/XXXXXXXXXX/$APP_NAME/g" privacy_policy.md
 sed -i '' "s/YYYYYYYYYY/$USER_EMAIL/g" privacy_policy.md
 sed -i '' "s/ZZZZZZZZZZ/$USER/g" privacy_policy.md
+
 # Build Site
-bundle exec jekyll build
+bundle exec jekyll build 
 
