@@ -101,5 +101,14 @@ add_file ./assets/css styles.scss "$CSS" 'CSS'
 SASS=".current {\r\n    color: green;\r\n}"
 add_file ./_sass main.scss "$SASS" 'SASS'
 
+#Downloading Privacy Policy
+USER_EMAIL="$(git config user.email)"
+PRIVACY_MD="---\r\ntitle: Privacy Policy\r\n---\r\n"
+add_file . privacy_policy.md "$PRIVACY_MD" 'Privacy Policy'
+curl -s https://raw.githubusercontent.com/WikipediaBrown/PrivacyPolicy-And-TermsAndConditions/master/Privacy%20Policy >> privacy_policy.md
+sed -i '' "s/XXXXXXXXXX/$APP_NAME/g" privacy_policy.md
+sed -i '' "s/YYYYYYYYYY/$USER_EMAIL/g" privacy_policy.md
+sed -i '' "s/ZZZZZZZZZZ/$USER/g" privacy_policy.md
 # Build Site
 bundle exec jekyll build
+
