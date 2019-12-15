@@ -4,12 +4,14 @@ layout: default
 <h1>{{ page.title }}</h1>
 <p>
     Written by {{ page.contributor }} on {{ page.date | date_to_string }} 
-    {% assign contributor = site.contributors | where: 'name', page.contributor %}
-    <br><br>
-    {{ contributor.name }}
-    {% if contributor %}
+    <!-- {% assign contributor = site.contributors | where: 'name', page.contributor %}
+    <br><br> -->
+    {% for contributor in site.contributors%}
+    {{ contributor.url }}
+    {% endfor %}
+    <!-- {% if contributor %}
         <a href="{{ site.baseurl }}{{ contributor.url }}">{{ contributor.name }}</a>
-    {% endif %}
+    {% endif %} -->
 </p>
 
 {{ content }}
