@@ -1,6 +1,6 @@
 ![MineBleeper Large Formate Image][header]
 ---
-![MineBleeper AppStore Icon][icon width=50 height =50]
+![MineBleeper AppStore Icon][icon]{:height="50%" width="50%"}
 ---
 
 
