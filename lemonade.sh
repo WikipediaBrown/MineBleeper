@@ -46,7 +46,7 @@ NAVIGATION_DATA="- name: Home\r\n  link: /index.html\r\n- name: About\r\n  link:
 add_file ./_data navigation.yml "$NAVIGATION_DATA" 'Navigation Data'
 
 # Adding Navigation HTML
-NAVIGATION_HTML="<nav>\r\n    {%% for item in site.data.navigation %%}\r\n        <a href=\"{{ site.baseurl }}{{ item.link }}\"|{{ page.url }}||{{ item.link }}| {%% if page.url == item.link %%}class=\"current\"{%% endif %%}>{{ item.name }}</a>\r\n    {%% endfor %%}\r\n</nav>\r\n"
+NAVIGATION_HTML="<nav>\r\n    {%% for item in site.data.navigation %%}\r\n        <a href=\"{{ site.baseurl }}{{ item.link }}\" {%% if page.url == item.link %%}class=\"current\"{%% endif %%}>{{ item.name }}</a>\r\n    {%% endfor %%}\r\n</nav>\r\n"
 add_file ./_includes navigation.html "$NAVIGATION_HTML" 'Navigation HTML'
 
 
