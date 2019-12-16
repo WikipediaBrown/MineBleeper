@@ -42,7 +42,7 @@ CONFIG_YAML="baseurl: \/MineBleeper\r\n\r\ncollections:\r\n  contributors:\r\n  
 add_file . _config.yml "$CONFIG_YAML" 'Configuration'
 
 # Adding Navigation Data
-NAVIGATION_DATA="- name: Home\r\n  link: /{{ site.baseurl }}/index.html\r\n- name: About\r\n  link: /{{ site.baseurl }}/about.html\r\n- name: Privacy Policy\r\n  link: /{{ site.baseurl }}/privacy_policy.html\r\n- name: Blog\r\n  link: /{{ site.baseurl }}/blog.html\r\n- name: Contributors\r\n  link: /{{ site.baseurl }}/contributors.html- name: Support\r\n  link: /{{ site.baseurl }}/support.html"
+NAVIGATION_DATA="- name: Home\r\n  link: /{{ site.baseurl }}/index.html\r\n- name: About\r\n  link: /{{ site.baseurl }}/about.html\r\n- name: Privacy Policy\r\n  link: /{{ site.baseurl }}/privacy_policy.html\r\n- name: Blog\r\n  link: /{{ site.baseurl }}/blog.html\r\n- name: Contributors\r\n  link: /{{ site.baseurl }}/contributors.html\r\n- name: Support\r\n  link: /{{ site.baseurl }}/support.html"
 add_file ./_data navigation.yml "$NAVIGATION_DATA" 'Navigation Data'
 
 # Adding Navigation HTML
