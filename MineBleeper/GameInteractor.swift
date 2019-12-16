@@ -56,7 +56,7 @@ class GameInteractor: GameInteractable {
     func onColumnCount() -> Int { board.count }
     func onRowCount() -> Int { board.first?.count ?? 0 }
     func onTileRequest(at indexPath: IndexPath) -> Bleepable { board[indexPath.section][indexPath.row] }
-    func onDidAppear() { /*presenter.presentLogin()*/ }
+    func onDidAppear() { presenter.presentLogin() }
     func onAppleLogin() {}
     
     func onGuestLogin() {
