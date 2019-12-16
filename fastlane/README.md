@@ -31,6 +31,11 @@ Build MineBleeper for TestFlight & AppStore
 fastlane ios match_with_options
 ```
 Resolve Signing Certificates and Provisioning Profiles for MineBleeper.
+### ios create_screenshots
+```
+fastlane ios create_screenshots
+```
+Create and Frame MineBleeper Screenshots.
 ### ios unit_test
 ```
 fastlane ios unit_test

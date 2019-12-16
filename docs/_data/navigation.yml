@@ -1,10 +1,11 @@
 - name: Home
-  link: /MineBleeper/index.html
+  link: /{{ site.baseurl }}/index.html
 - name: About
-  link: /MineBleeper/about.html
+  link: /{{ site.baseurl }}/about.html
 - name: Privacy Policy
-  link: /MineBleeper/privacy_policy.html
+  link: /{{ site.baseurl }}/privacy_policy.html
 - name: Blog
-  link: /MineBleeper/blog.html
+  link: /{{ site.baseurl }}/blog.html
 - name: Contributors
-  link: /MineBleeper/contributors.html
+  link: /{{ site.baseurl }}/contributors.html- name: Support
+  link: /{{ site.baseurl }}/support.html

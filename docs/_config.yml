@@ -1,4 +1,4 @@
-baseurl: /MineBleeper
+baseurl: \/MineBleeper
 
 collections:
   contributors:
@@ -15,6 +15,11 @@ defaults:
       type: "posts"
     values:
       layout: "post"
+  - scope:
+      path: ""
+      type: "support"
+    values:
+      layout: "support"
   - scope:
       path: ""
     values:
