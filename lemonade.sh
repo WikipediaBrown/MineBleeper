@@ -108,13 +108,13 @@ POST_LAYOUT="---\r\nlayout: default\r\n---\r\n<h1>{{ page.title }}</h1>\r\n<p>\r
 add_file ./_layouts post.html "$POST_LAYOUT" 'Post Layout'
 
 
-# Adding Styles Sheets
+# Adding SASS Import File
 # Adding CSS
-CSS="---\r\n---\r\n@import \"main\";"
-add_file ./assets/css styles.scss "$CSS" 'CSS'
+SASS_IMPORT="---\r\n---\r\n@import \"main\";"
+add_file ./assets/css styles.scss "$SASS_IMPORT" 'SASS Import'
 
 # Adding SASS
-SASS=".current {\r\n    color: green;\r\n}"
+SASS=".current {\r\n    color: green;\r\n}\r\n\r\nnav {\r\n    background-color: black;\r\n}"
 add_file ./_sass main.scss "$SASS" 'SASS'
 
 #Downloading Privacy Policy
