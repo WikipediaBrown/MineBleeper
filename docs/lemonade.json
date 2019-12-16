@@ -1,1 +1,3 @@
-{ marketingPath: "/MineBleeper",  privacyPolicyPath: "/MineBleeper/privacy_policy.html",  supportPath: ""}
+{ "marketingPath": "/MineBleeper",
+  "privacyPolicyPath": "/MineBleeper/privacy_policy.html",
+  "supportPath": ""}

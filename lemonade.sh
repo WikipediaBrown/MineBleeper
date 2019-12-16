@@ -117,7 +117,7 @@ sed -i '' "s/ZZZZZZZZZZ/$USER/g" privacy_policy.md
 # Build Site
 bundle exec jekyll build 
 
-printf "{ marketingPath: \"/$APP_NAME\"," > lemonade.json
-printf "  privacyPolicyPath: \"/$APP_NAME/privacy_policy.html\"," >> lemonade.json
-printf "  supportPath: \"\"}" >> lemonade.json
+printf "{ \"marketingPath\": \"/$APP_NAME\",\r\n" > lemonade.json
+printf "  \"privacyPolicyPath\": \"/$APP_NAME/privacy_policy.html\",\r\n" >> lemonade.json
+printf "  \"supportPath\": \"\"}" >> lemonade.json
 
