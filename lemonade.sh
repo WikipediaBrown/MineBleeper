@@ -115,7 +115,7 @@ SASS_IMPORT="---\r\n---\r\n@import \"main\";"
 add_file ./assets/css styles.scss "$SASS_IMPORT" 'SASS Import'
 
 # Adding SASS
-SASS=".current {\r\n    text-decoration: underline;\r\n}\r\n\r\nnav {\r\n    float: right;\r\n}\r\n\r\nnav a:hover {\r\n    color: red;\r\n}\r\n\r\nnav a {\r\n    color: white;\r\n    font-size: 1vw;\r\n    font-family: \"SF Display\";\r\n    font-weight: 900;\r\n    text-align: center;\r\n    text-decoration: none;\r\n}\r\n\r\nbody {\r\n    background-color: black;\r\n    color: white;\r\n    font-size: 9vw;\r\n    font-family: \"SF Display\";\r\n    font-weight: 900;\r\n}\r\n\r\n@font-face {\r\n    font-family: \"SF Display\";\r\n    font-weight: 900;\r\n    src: url(\"https:\\\/\\\/sf.abarba.me\\\/SF-UI-Display-Black.otf\");\r\n}"
+SASS=".current {\r\n    text-decoration: underline;\r\n}\r\n\r\nnav {\r\n    width: 100%;\r\n    height: 20pt;\r\n    float: right;\r\n}\r\n\r\nnav a:hover {\r\n    color: red;\r\n}\r\n\r\nnav a {\r\n    color: white;\r\n    font-size: 1vw;\r\n    font-family: \"SF Display\";\r\n    font-weight: 900;\r\n    text-align: center;\r\n    text-decoration: none;\r\n}\r\n\r\nbody {\r\n    background-color: black;\r\n    color: white;\r\n    font-size: 9vw;\r\n    font-family: \"SF Display\";\r\n    font-weight: 900;\r\n}\r\n\r\n@font-face {\r\n    font-family: \"SF Display\";\r\n    font-weight: 900;\r\n    src: url(\"https:\\\/\\\/sf.abarba.me\\\/SF-UI-Display-Black.otf\");\r\n}"
 
 add_file ./_sass main.scss "$SASS" 'SASS'
 
