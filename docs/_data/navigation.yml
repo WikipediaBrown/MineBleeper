@@ -1,8 +1,8 @@
-- name: Home
+- name: BLEEP
   link: /
 - name: About
   link: /about.html
-- name: Privacy Policy
+- name: Privacy
   link: /privacy_policy.html
 - name: Blog
   link: /blog.html

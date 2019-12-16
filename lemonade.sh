@@ -2,6 +2,7 @@
 # 
 # Initial values needed to build Jekyll site
 APP_NAME=${PWD##*/}
+STYLED_NAME="Mine\r\nBleeper"
 JEKYLL_DIRECTORY=docs
 
 
@@ -42,7 +43,7 @@ CONFIG_YAML="baseurl: /$APP_NAME\r\n\r\ncollections:\r\n  contributors:\r\n    o
 add_file . _config.yml "$CONFIG_YAML" 'Configuration'
 
 # Adding Navigation Data
-NAVIGATION_DATA="- name: Home\r\n  link: /\r\n- name: About\r\n  link: /about.html\r\n- name: Privacy Policy\r\n  link: /privacy_policy.html\r\n- name: Blog\r\n  link: /blog.html\r\n- name: Contributors\r\n  link: /contributors.html\r\n- name: Support\r\n  link: /support.html\r\n- name: Beta\r\n  link: /beta.html"
+NAVIGATION_DATA="- name: BLEEP\r\n  link: /\r\n- name: About\r\n  link: /about.html\r\n- name: Privacy\r\n  link: /privacy_policy.html\r\n- name: Blog\r\n  link: /blog.html\r\n- name: Contributors\r\n  link: /contributors.html\r\n- name: Support\r\n  link: /support.html\r\n- name: Beta\r\n  link: /beta.html"
 add_file ./_data navigation.yml "$NAVIGATION_DATA" 'Navigation Data'
 
 # Adding Navigation HTML
@@ -86,7 +87,7 @@ ERROR_MD="---\r\nlayout: default\r\n---\r\n\r\n# 404\r\n\r\nPage not found! :("
 add_file . 404.md "$ERROR_MD" '404'
 
 # Adding Index File
-INDEX_HTML="---\r\ntitle: Home\r\n---\r\n<h1>$APP_NAME</h1>\r\n\r\n<p>It's the app for that!</p>"
+INDEX_HTML="---\r\ntitle: Home-{{ page.name }}\r\n---\r\n<h1>$STYLED_NAME</h1>\r\n\r\n<p>It's the app for that!</p>"
 add_file . index.html "$INDEX_HTML" 'Index'
 
 # Adding Support File
@@ -114,7 +115,7 @@ SASS_IMPORT="---\r\n---\r\n@import \"main\";"
 add_file ./assets/css styles.scss "$SASS_IMPORT" 'SASS Import'
 
 # Adding SASS
-SASS=".current {\r\n    color: green;\r\n}\r\n\r\nnav a {\r\n    color: white;\r\n    font-family: \"SF Display\";\r\n    font-weight: 900;\r\n}\r\n\r\nbody {\r\n    background-color: black;\r\n    color: white;\r\n    font-family: \"SF Display\";\r\n    font-weight: 900;\r\n}\r\n\r\n@font-face {\r\n    font-family: \"SF Display\";\r\n    font-weight: 900;\r\n    src: url(\"https:\/\/sf.abarba.me\/SF-UI-Display-Black.otf\");\r\n}"
+SASS=".current {\r\n    color: red;\r\n}\r\n\r\nnav a {\r\n    color: white;\r\n    font-family: \"SF Display\";\r\n    font-weight: 900;\r\n}\r\n\r\nbody {\r\n    background-color: black;\r\n    color: white;\r\n    font-family: \"SF Display\";\r\n    font-weight: 900;\r\n}\r\n\r\n@font-face {\r\n    font-family: \"SF Display\";\r\n    font-weight: 900;\r\n    src: url(\"https:\/\/sf.abarba.me\/SF-UI-Display-Black.otf\");\r\n}"
 add_file ./_sass main.scss "$SASS" 'SASS'
 
 #Downloading Privacy Policy
