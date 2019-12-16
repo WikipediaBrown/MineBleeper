@@ -1,7 +1,7 @@
 .current { color: green; }
 
-.nav a { color: white; }
+nav a { color: white; }
 
-body { background-color: black; }
+body { background-color: black; color: white; }
 
 /*# sourceMappingURL=styles.css.map */
