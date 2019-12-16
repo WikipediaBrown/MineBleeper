@@ -7,8 +7,8 @@
 	],
 	"sourcesContent": [
 		"@import \"main\";",
-		".current {\r\n    color: green;\r\n}\r\n\r\nnav a {\r\n    color: white;\r\n}\r\n\r\nbody {\r\n    background-color: black;\r\ncolor: white;\r\n}"
+		".current {\r\n    color: green;\r\n}\r\n\r\nnav a {\r\n    background-color: white;\r\n}\r\n\r\nbody {\r\n    background-color: black;\r\ncolor: white;\r\n}"
 	],
 	"names": [],
-	"mappings": "ACAA,AAAA,QAAQ,CAAC,EACL,KAAK,EAAE,KAAK,GACf;;AAED,AAAA,GAAG,CAAC,CAAC,CAAC,EACF,KAAK,EAAE,KAAK,GACf;;AAED,AAAA,IAAI,CAAC,EACD,gBAAgB,EAAE,KAAK,EAC3B,KAAK,EAAE,KAAK,GACX"
+	"mappings": "ACAA,AAAA,QAAQ,CAAC,EACL,KAAK,EAAE,KAAK,GACf;;AAED,AAAA,GAAG,CAAC,CAAC,CAAC,EACF,gBAAgB,EAAE,KAAK,GAC1B;;AAED,AAAA,IAAI,CAAC,EACD,gBAAgB,EAAE,KAAK,EAC3B,KAAK,EAAE,KAAK,GACX"
 }
