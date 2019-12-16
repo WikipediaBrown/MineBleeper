@@ -114,7 +114,7 @@ SASS_IMPORT="---\r\n---\r\n@import \"main\";"
 add_file ./assets/css styles.scss "$SASS_IMPORT" 'SASS Import'
 
 # Adding SASS
-SASS=".current {\r\n    color: green;\r\n}\r\n\r\nnav {\r\n    color: white;\r\n}\r\n\r\nbody {\r\n    background-color: black;\r\n}"
+SASS=".current {\r\n    color: green;\r\n}\r\n\r\nnav a {\r\n    color: white;\r\n}\r\n\r\nbody {\r\n    background-color: black;\r\n}"
 add_file ./_sass main.scss "$SASS" 'SASS'
 
 #Downloading Privacy Policy
