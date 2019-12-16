@@ -1,5 +1,5 @@
 .current {
-    color: red;
+    text-decoration: underline;
 }
 
 nav {
@@ -7,13 +7,12 @@ nav {
 }
 
 nav a:hover {
-    background-color: white;
-    color: black;
+    color: red;
 }
 
 nav a {
     color: white;
-    font-size: 10px;
+    font-size: 1vw;
     font-family: "SF Display";
     font-weight: 900;
     text-align: center;
@@ -23,7 +22,7 @@ nav a {
 body {
     background-color: black;
     color: white;
-    font-size: 10vw;
+    font-size: 9vw;
     font-family: "SF Display";
     font-weight: 900;
 }

@@ -1,12 +1,12 @@
-.current { color: red; }
+.current { text-decoration: underline; }
 
 nav { float: right; }
 
-nav a:hover { background-color: white; color: black; }
+nav a:hover { color: red; }
 
-nav a { color: white; font-size: 10px; font-family: "SF Display"; font-weight: 900; text-align: center; text-decoration: none; }
+nav a { color: white; font-size: 1vw; font-family: "SF Display"; font-weight: 900; text-align: center; text-decoration: none; }
 
-body { background-color: black; color: white; font-size: 10vw; font-family: "SF Display"; font-weight: 900; }
+body { background-color: black; color: white; font-size: 9vw; font-family: "SF Display"; font-weight: 900; }
 
 @font-face { font-family: "SF Display"; font-weight: 900; src: url("https://sf.abarba.me/SF-UI-Display-Black.otf"); }
 
