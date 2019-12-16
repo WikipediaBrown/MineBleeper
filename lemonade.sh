@@ -83,7 +83,7 @@ add_file . index.html "$INDEX_HTML" 'Index'
 
 # Adding Support File
 SUPPORT_MD="---\r\ntitle: Support\r\n---\r\n# Support page\r\n\r\nThis page is where you should come for help with $APP_NAME."
-add_file . about.md "$SUPPORT_MD" 'Support'
+add_file . support.md "$SUPPORT_MD" 'Support'
 
 
 # Adding Layouts
