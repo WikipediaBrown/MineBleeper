@@ -82,7 +82,7 @@ INDEX_HTML="---\r\ntitle: Home\r\n---\r\n<h1>$APP_NAME</h1>\r\n\r\n<p>It's the a
 add_file . index.html "$INDEX_HTML" 'Index'
 
 # Adding Support File
-SUPPORT_MD="---\r\ntitle: Support\r\n---\r\n# Support page\r\n\r\nThis page is where you should come for help with $APP_NAME.\r\nEmail $(git config user.email) "
+SUPPORT_MD="---\r\ntitle: Support\r\n---\r\n# Support page\r\n\r\nThis page is where you should come for help with $APP_NAME."
 add_file . support.md "$SUPPORT_MD" 'Support'
 
 # Adding Support File
