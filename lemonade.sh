@@ -7,7 +7,7 @@ JEKYLL_DIRECTORY=docs
 
 # Function List
 # If file does not exists, create it and add its content
-add_file () { echo "Checking $4 file."; test -f "$1/$2" || { mkdir -p "$1"; touch "$1/$2"; printf -- "$3" > "$1/$2"; tput setaf 2; echo "Added $2..."; }; }
+add_file () { echo "Checking $4 file."; test -f "$1/$2" || { mkdir -p "$1"; touch "$1/$2"; printf -- "$3" > "$1/$2"; echo "Added $2..."; }; }
 
 # Beginning Site Setup
 echo "Setting up site for $APP_NAME"
