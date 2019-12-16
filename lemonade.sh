@@ -42,7 +42,7 @@ CONFIG_YAML="baseurl: /$APP_NAME\r\n\r\ncollections:\r\n  contributors:\r\n    o
 add_file . _config.yml "$CONFIG_YAML" 'Configuration'
 
 # Adding Navigation Data
-NAVIGATION_DATA="- name: Home\r\n  link: /$APP_NAME/index.html\r\n- name: About\r\n  link: /$APP_NAME/about.html\r\n- name: Privacy Policy\r\n  link: /$APP_NAME/privacy_policy.html\r\n- name: Blog\r\n  link: /$APP_NAME/blog.html\r\n- name: Contributors\r\n  link: /$APP_NAME/contributors.html\r\n- name: Support\r\n  link: /$APP_NAME/support.html"
+NAVIGATION_DATA="- name: Home\r\n  link: /$APP_NAME/index.html\r\n- name: About\r\n  link: /$APP_NAME/about.html\r\n- name: Privacy Policy\r\n  link: /$APP_NAME/privacy_policy.html\r\n- name: Blog\r\n  link: /$APP_NAME/blog.html\r\n- name: Contributors\r\n  link: /$APP_NAME/contributors.html\r\n- name: Support\r\n  link: /$APP_NAME/support.html- name: Beta\r\n  link: /$APP_NAME/beta.html"
 add_file ./_data navigation.yml "$NAVIGATION_DATA" 'Navigation Data'
 
 # Adding Navigation HTML
@@ -82,9 +82,12 @@ INDEX_HTML="---\r\ntitle: Home\r\n---\r\n<h1>$APP_NAME</h1>\r\n\r\n<p>It's the a
 add_file . index.html "$INDEX_HTML" 'Index'
 
 # Adding Support File
-SUPPORT_MD="---\r\ntitle: Support\r\n---\r\n# Support page\r\n\r\nThis page is where you should come for help with $APP_NAME."
+SUPPORT_MD="---\r\ntitle: Support\r\n---\r\n# Support page\r\n\r\nThis page is where you should come for help with $APP_NAME.\r\nEmail $(git config user.email) "
 add_file . support.md "$SUPPORT_MD" 'Support'
 
+# Adding Support File
+BETA_MD="---\r\ntitle: Beta\r\n---\r\n# Beta page\r\n\r\nThis page is where you can sign up for access to the $APP_NAME Beta."
+add_file . beta.md "$BETA_MD" 'Beta'
 
 # Adding Layouts
 # Adding Contributor Layout
