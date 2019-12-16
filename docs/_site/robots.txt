@@ -1,1 +1,1 @@
-Sitemap: /%5C/MineBleeper/sitemap.xml
+Sitemap: /MineBleeper/sitemap.xml
