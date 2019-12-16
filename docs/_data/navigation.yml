@@ -1,12 +1,12 @@
 - name: Home
-  link: /{{ site.baseurl }}/index.html
+  link: /index.html
 - name: About
-  link: /{{ site.baseurl }}/about.html
+  link: /about.html
 - name: Privacy Policy
-  link: /{{ site.baseurl }}/privacy_policy.html
+  link: /privacy_policy.html
 - name: Blog
-  link: /{{ site.baseurl }}/blog.html
+  link: /blog.html
 - name: Contributors
-  link: /{{ site.baseurl }}/contributors.html
+  link: /contributors.html
 - name: Support
-  link: /{{ site.baseurl }}/support.html
+  link: /support.html
