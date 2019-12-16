@@ -1,7 +1,9 @@
 .current { color: green; }
 
-nav a { color: blue; }
+nav a { color: white; font-family: "SF Display"; font-weight: 900; }
 
-body { background-color: black; color: tomato; }
+body { background-color: black; color: white; font-family: "SF Display"; font-weight: 900; }
+
+@font-face { font-family: "SF Display"; font-weight: 900; src: url("https://sf.abarba.me/SF-UI-Display-Black.otf"); }
 
 /*# sourceMappingURL=styles.css.map */

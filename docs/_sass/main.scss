@@ -3,10 +3,20 @@
 }
 
 nav a {
-    color: blue;
+    color: white;
+    font-family: "SF Display";
+    font-weight: 900;
 }
 
 body {
     background-color: black;
-color: tomato;
+    color: white;
+    font-family: "SF Display";
+    font-weight: 900;
+}
+
+@font-face {
+    font-family: "SF Display";
+    font-weight: 900;
+    src: url("https:\/\/sf.abarba.me\/SF-UI-Display-Black.otf");
 }
