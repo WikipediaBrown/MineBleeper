@@ -2,11 +2,22 @@
     color: red;
 }
 
+nav {
+    float: right;
+}
+
+nav a:hover {
+    background-color: white;
+    color: black;
+}
+
 nav a {
     color: white;
     font-size: 10px;
     font-family: "SF Display";
     font-weight: 900;
+    text-align: center;
+    text-decoration: none;
 }
 
 body {

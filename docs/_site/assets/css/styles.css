@@ -1,6 +1,10 @@
 .current { color: red; }
 
-nav a { color: white; font-size: 10px; font-family: "SF Display"; font-weight: 900; }
+nav { float: right; }
+
+nav a:hover { background-color: white; color: black; }
+
+nav a { color: white; font-size: 10px; font-family: "SF Display"; font-weight: 900; text-align: center; text-decoration: none; }
 
 body { background-color: black; color: white; font-size: 10vw; font-family: "SF Display"; font-weight: 900; }
 
