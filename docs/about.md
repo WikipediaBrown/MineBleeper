@@ -3,4 +3,4 @@ title: About
 ---
 # About page
 
-This page tells you a little bit about HueBoo.
+This page tells you a little bit about MineBleeper.

@@ -1,5 +1,5 @@
 - name: Home
-  link: "/{{ site.baseurl }}/index.html"
+  link: /MineBleeper/index.html
 - name: About
   link: /MineBleeper/about.html
 - name: Privacy Policy
@@ -8,3 +8,5 @@
   link: /MineBleeper/blog.html
 - name: Contributors
   link: /MineBleeper/contributors.html
+- name: Support
+  link: /MineBleeper/support.html

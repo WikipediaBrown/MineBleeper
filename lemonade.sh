@@ -42,7 +42,7 @@ CONFIG_YAML="baseurl: /$APP_NAME\r\n\r\ncollections:\r\n  contributors:\r\n    o
 add_file . _config.yml "$CONFIG_YAML" 'Configuration'
 
 # Adding Navigation Data
-NAVIGATION_DATA="- name: Home\r\n  link: \"/{{ site.baseurl }}/index.html\"\r\n- name: About\r\n  link: /$APP_NAME/about.html\r\n- name: Privacy Policy\r\n  link: /$APP_NAME/privacy_policy.html\r\n- name: Blog\r\n  link: /$APP_NAME/blog.html\r\n- name: Contributors\r\n  link: /$APP_NAME/contributors.html"
+NAVIGATION_DATA="- name: Home\r\n  link: /$APP_NAME/index.html\r\n- name: About\r\n  link: /$APP_NAME/about.html\r\n- name: Privacy Policy\r\n  link: /$APP_NAME/privacy_policy.html\r\n- name: Blog\r\n  link: /$APP_NAME/blog.html\r\n- name: Contributors\r\n  link: /$APP_NAME/contributors.html\r\n- name: Support\r\n  link: /$APP_NAME/support.html"
 add_file ./_data navigation.yml "$NAVIGATION_DATA" 'Navigation Data'
 
 # Adding Navigation HTML
@@ -66,7 +66,7 @@ add_file ./_posts "$(date +%F)-ComingSoon.md" "$POST_CONTENT" 'Post Content'
 
 # Adding Page Files
 # Adding About File
-ABOUT_MD="---\r\ntitle: About\r\n---\r\n# About page\r\n\r\nThis page tells you a little bit about HueBoo."
+ABOUT_MD="---\r\ntitle: About\r\n---\r\n# About page\r\n\r\nThis page tells you a little bit about $APP_NAME."
 add_file . about.md "$ABOUT_MD" 'About'
 
 # Adding Blog File
@@ -80,6 +80,10 @@ add_file . contributors.html "$CONTRIBUTORS_HTML" 'Contributors'
 # Adding Index File
 INDEX_HTML="---\r\ntitle: Home\r\n---\r\n<h1>$APP_NAME</h1>\r\n\r\n<p>It's the app for that!</p>"
 add_file . index.html "$INDEX_HTML" 'Index'
+
+# Adding Support File
+SUPPORT_MD="---\r\ntitle: Support\r\n---\r\n# Support page\r\n\r\nThis page is where you should come for help with $APP_NAME."
+add_file . about.md "$SUPPORT_MD" 'Support'
 
 
 # Adding Layouts
