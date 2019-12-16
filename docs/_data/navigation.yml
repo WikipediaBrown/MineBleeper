@@ -1,10 +1,10 @@
 - name: Home
-  link: /index.html
+  link: /poop/index.html
 - name: About
-  link: /about.html
+  link: /MineBleeper/about.html
 - name: Privacy Policy
-  link: /privacy_policy.html
+  link: /MineBleeper/privacy_policy.html
 - name: Blog
-  link: /blog.html
+  link: /MineBleeper/blog.html
 - name: Contributors
-  link: /contributors.html
+  link: /MineBleeper/contributors.html
