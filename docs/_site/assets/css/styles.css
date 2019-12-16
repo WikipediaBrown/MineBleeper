@@ -1,6 +1,6 @@
 .current { color: green; }
 
-nav { color: white; }
+nav a { color: tomato; }
 
 body { background-color: black; color: white; }
 
