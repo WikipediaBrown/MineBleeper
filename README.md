@@ -1,6 +1,6 @@
 ![MineBleeper Large Formate Image][header]
 ---
-![MineBleeper AppStore Icon][icon | width=100px | alt=Bridge]
+![MineBleeper AppStore Icon][icon]
 ---
 
 [header]: /images/MineBleeper_Large_Format.png "MineBleeper is bleepin' all over ya bruh..."

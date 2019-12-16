@@ -100,7 +100,7 @@ CONTRIBUTOR_LAYOUT="---\r\nlayout: default\r\n---\r\n<h1>{{ page.name }}</h1>\r\
 add_file ./_layouts contributor.html "$CONTRIBUTOR_LAYOUT" 'Contributor Layout'
 
 # Adding Default Layout
-DEFAULT_LAYOUT="<!doctype html>\r\n<html>\r\n  <head>\r\n    <meta charset=\"utf-8\">\r\n    <title>{{ page.title }}</title>\r\n    <link rel=\"stylesheet\" href=\"/assets/css/styles.css\">\r\n    {%% feed_meta %%}\r\n    {%% seo %%}\r\n  </head>\r\n  <body>\r\n    {%% include navigation.html %%}\r\n    {{ content }}\r\n  </body>\r\n</html>\r\n"
+DEFAULT_LAYOUT="<!doctype html>\r\n<html>\r\n  <head>\r\n    <meta charset=\"utf-8\">\r\n    <title>{{ page.title }}</title>\r\n    <link rel=\"stylesheet\" href=\"{{ site.baseurl }}/assets/css/styles.css\">\r\n    {%% feed_meta %%}\r\n    {%% seo %%}\r\n  </head>\r\n  <body>\r\n    {%% include navigation.html %%}\r\n    {{ content }}\r\n  </body>\r\n</html>\r\n"
 add_file ./_layouts default.html "$DEFAULT_LAYOUT" 'Default Layout'
 
 # Adding Post Layout
