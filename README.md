@@ -1,6 +1,10 @@
 ![MineBleeper Large Formate Image][header]
 ---
-![MineBleeper AppStore Icon][icon]<!-- .element style="width: 50%; height: 50%" -->
+<p>
+    <img src="/MineBleeper/Assets.xcassets/AppIcon.appiconset/Icon.png" alt="MineBleeper AppStore Icon" style="float:left;width:25%;height:25%;">
+        The image will float to the left of the text.
+</p>
+![MineBleeper AppStore Icon][icon]
 ---
 
 

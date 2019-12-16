@@ -7,7 +7,7 @@ JEKYLL_DIRECTORY=docs
 
 # Function List
 # If file does not exists, create it and add its content
-add_file () { echo "Checking $4 file."; test -f "$1/$2" || { mkdir -p "$1"; touch "$1/$2"; printf -- "$3" > "$1/$2"; echo "Added $2..."; }; }
+add_file () { echo "Checking $4 file."; test -f "$1/$2" || { mkdir -p "$1"; touch "$1/$2"; printf -- "$3" > "$1/$2"; tput setaf 2; echo "Added $2..."; }; }
 
 # Beginning Site Setup
 echo "Setting up site for $APP_NAME"
@@ -46,7 +46,7 @@ NAVIGATION_DATA="- name: Home\r\n  link: /$APP_NAME/index.html\r\n- name: About\
 add_file ./_data navigation.yml "$NAVIGATION_DATA" 'Navigation Data'
 
 # Adding Navigation HTML
-NAVIGATION_HTML="<nav>\r\n    {%% for item in site.data.navigation %%}\r\n        <a href=\"{{ item.link }}\" {%% if page.url == item.link %%}class=\"current\"{%% endif %%}>{{ item.name }}</a>\r\n    {%% endfor %%}\r\n</nav>\r\n"
+NAVIGATION_HTML="<nav>\r\n    {%% for item in site.data.navigation %%}\r\n        <a href=\"{{ item.link }}\" {%% if page.url | prepend: site.baseurl == item.link %%}class=\"current\"{%% endif %%}>{{ item.name }}</a>\r\n    {%% endfor %%}\r\n</nav>\r\n"
 add_file ./_includes navigation.html "$NAVIGATION_HTML" 'Navigation HTML'
 
 
@@ -69,6 +69,10 @@ add_file ./_posts "$(date +%F)-ComingSoon.md" "$POST_CONTENT" 'Post Content'
 ABOUT_MD="---\r\ntitle: About\r\n---\r\n# About page\r\n\r\nThis page tells you a little bit about $APP_NAME."
 add_file . about.md "$ABOUT_MD" 'About'
 
+# Adding Support File
+BETA_MD="---\r\ntitle: Beta\r\n---\r\n# Beta page\r\n\r\nThis page is where you can sign up for access to the $APP_NAME Beta."
+add_file . beta.md "$BETA_MD" 'Beta'
+
 # Adding Blog File
 BLOG_HTML="---\r\ntitle: Blog\r\n---\r\n<h1>Latest Posts</h1>\r\n\r\n<ul>\r\n  {%% for post in site.posts %%}\r\n    <li>\r\n      <h2><a href=\"{{ site.baseurl }}{{ post.url }}\">{{ post.title }}</a></h2>\r\n      <p>{{ post.excerpt }}</p>\r\n    </li>\r\n  {%% endfor %%}\r\n</ul>"
 add_file . blog.html "$BLOG_HTML" 'Blog'
@@ -76,6 +80,10 @@ add_file . blog.html "$BLOG_HTML" 'Blog'
 # Adding Contributors File
 CONTRIBUTORS_HTML="---\r\ntitle: Contributors\r\n---\r\n<h1>Contributors</h1>\r\n\r\n<ul>\r\n  {%% for contributor in site.contributors %%}\r\n    <li>\r\n      <h2><a href=\"{{ site.baseurl }}{{ contributor.url }}\">{{ contributor.name }}</a></h2>\r\n      <h3>{{ contributor.position }}</h3>\r\n      <p>{{ contributor.content | markdownify }}</p>\r\n    </li>\r\n  {%% endfor %%}\r\n</ul>"
 add_file . contributors.html "$CONTRIBUTORS_HTML" 'Contributors'
+
+# Adding 404 File
+ERROR_MD="---\r\nlayout: default\r\n---\r\n\r\n# 404\r\n\r\nPage not found! :("
+add_file . 404.md "$ERROR_MD" '404'
 
 # Adding Index File
 INDEX_HTML="---\r\ntitle: Home\r\n---\r\n<h1>$APP_NAME</h1>\r\n\r\n<p>It's the app for that!</p>"
@@ -85,9 +93,6 @@ add_file . index.html "$INDEX_HTML" 'Index'
 SUPPORT_MD="---\r\ntitle: Support\r\n---\r\n# Support page\r\n\r\nThis page is where you should come for help with $APP_NAME."
 add_file . support.md "$SUPPORT_MD" 'Support'
 
-# Adding Support File
-BETA_MD="---\r\ntitle: Beta\r\n---\r\n# Beta page\r\n\r\nThis page is where you can sign up for access to the $APP_NAME Beta."
-add_file . beta.md "$BETA_MD" 'Beta'
 
 # Adding Layouts
 # Adding Contributor Layout
