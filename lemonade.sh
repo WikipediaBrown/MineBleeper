@@ -42,7 +42,7 @@ CONFIG_YAML="baseurl: /$APP_NAME\r\n\r\ncollections:\r\n  contributors:\r\n    o
 add_file . _config.yml "$CONFIG_YAML" 'Configuration'
 
 # Adding Navigation Data
-NAVIGATION_DATA="- name: Home\r\n  link: /$APP_NAME/index.html\r\n- name: About\r\n  link: /$APP_NAME/about.html\r\n- name: Privacy Policy\r\n  link: /$APP_NAME/privacy_policy.html\r\n- name: Blog\r\n  link: /$APP_NAME/blog.html\r\n- name: Contributors\r\n  link: /$APP_NAME/contributors.html"
+NAVIGATION_DATA="- name: Home\r\n  link: /{{ site.baseurl }}/index.html\r\n- name: About\r\n  link: /$APP_NAME/about.html\r\n- name: Privacy Policy\r\n  link: /$APP_NAME/privacy_policy.html\r\n- name: Blog\r\n  link: /$APP_NAME/blog.html\r\n- name: Contributors\r\n  link: /$APP_NAME/contributors.html"
 add_file ./_data navigation.yml "$NAVIGATION_DATA" 'Navigation Data'
 
 # Adding Navigation HTML

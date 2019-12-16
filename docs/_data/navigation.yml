@@ -1,5 +1,5 @@
 - name: Home
-  link: /MineBleeper/index.html
+  link: /{{ site.baseurl }}/index.html
 - name: About
   link: /MineBleeper/about.html
 - name: Privacy Policy
