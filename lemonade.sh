@@ -42,11 +42,11 @@ CONFIG_YAML="baseurl: /$APP_NAME\r\n\r\ncollections:\r\n  contributors:\r\n    o
 add_file . _config.yml "$CONFIG_YAML" 'Configuration'
 
 # Adding Navigation Data
-NAVIGATION_DATA="- name: Home\r\n  link: /$APP_NAME/index.html\r\n- name: About\r\n  link: /about.html\r\n- name: Privacy Policy\r\n  link: /privacy_policy.html\r\n- name: Blog\r\n  link: /blog.html\r\n- name: Contributors\r\n  link: /contributors.html\r\n- name: Support\r\n  link: /support.html\r\n- name: Beta\r\n  link: /beta.html"
+NAVIGATION_DATA="- name: Home\r\n  link: /index.html\r\n- name: About\r\n  link: /about.html\r\n- name: Privacy Policy\r\n  link: /privacy_policy.html\r\n- name: Blog\r\n  link: /blog.html\r\n- name: Contributors\r\n  link: /contributors.html\r\n- name: Support\r\n  link: /support.html\r\n- name: Beta\r\n  link: /beta.html"
 add_file ./_data navigation.yml "$NAVIGATION_DATA" 'Navigation Data'
 
 # Adding Navigation HTML
-NAVIGATION_HTML="<nav>\r\n    {%% for item in site.data.navigation %%}\r\n        <a href=\"{{ site.baseurl }}{{ item.link }}\"|{{ site.baseurl }}| {%% if page.url == item.link %%}class=\"current\"{%% endif %%}>{{ item.name }}</a>\r\n    {%% endfor %%}\r\n</nav>\r\n"
+NAVIGATION_HTML="<nav>\r\n    {%% for item in site.data.navigation %%}\r\n        <a href=\"{{ site.baseurl }}{{ item.link }}\"|{{ page.url }}||{{ item.link }}| {%% if page.url == item.link %%}class=\"current\"{%% endif %%}>{{ item.name }}</a>\r\n    {%% endfor %%}\r\n</nav>\r\n"
 add_file ./_includes navigation.html "$NAVIGATION_HTML" 'Navigation HTML'
 
 
