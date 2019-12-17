@@ -1,0 +1,218 @@
+output:
+
+  # Command line:  -o, --output FOLDER
+  # Folder to output the HTML docs to
+  # Default: docs
+
+clean:
+
+  # Command line:  -c, --[no-]clean
+  # Delete contents of output directory before running. 
+  # WARNING: If --output is set to ~/Desktop, this will delete the ~/Desktop directory.
+
+objc:
+
+  # Command line:  --[no-]objc
+  # Generate docs for Objective-C.
+
+umbrella_header:
+
+  # Command line:  --umbrella-header PATH
+  # Umbrella header for your Objective-C framework.
+
+framework_root:
+
+  # Command line:  --framework-root PATH
+  # The root path to your Objective-C framework.
+
+sdk:
+
+  # Command line:  --sdk [iphone|watch|appletv][os|simulator]|macosx
+  # The SDK for which your code should be built.
+  # Default: macosx
+
+hide_declarations:
+
+  # Command line:  --hide-declarations [objc|swift] 
+  # Hide declarations in the specified language. Given that generating Swift docs only generates Swift declarations, this is useful for hiding a specific interface for either Objective-C or mixed Objective-C and Swift projects.
+
+config:
+
+  # Configuration file (.yaml or .json)
+  # Default: .jazzy.yaml in source directory or ancestor
+
+build_tool_arguments:
+
+  # Arguments to forward to xcodebuild, swift build, or sourcekitten.
+  # Default: []
+
+build_tool_arguments:
+
+  # Command line:  -x, --xcodebuild-arguments arg1,arg2,…argN
+  # Back-compatibility alias for build_tool_arguments.
+
+sourcekitten_sourcefile:
+
+  # Command line:  -s, --sourcekitten-sourcefile filepath1,…filepathN
+  # File(s) generated from sourcekitten output to parse
+
+source_directory:
+
+  # Command line:  --source-directory DIRPATH
+  # The directory that contains the source to be documented
+  # Default: /Users/wikipediabrown/Library/Mobile Documents/com~apple~CloudDocs/.Trash/Wishlist/Wishlist
+
+exclude:
+
+  # Command line:  -e, --exclude filepath1,filepath2,…filepathN
+  # Source file pathnames to be excluded from documentation. Supports wildcards.
+  # Default: []
+
+include:
+
+  # Command line:  -i, --include filepath1,filepath2,…filepathN
+  # Source file pathnames to be included in documentation. Supports wildcards.
+  # Default: []
+
+swift_version:
+
+  # Command line:  --swift-version VERSION
+
+swift_build_tool:
+
+  # Command line:  --swift-build-tool spm | xcodebuild
+  # Control whether Jazzy uses Swift Package Manager or xcodebuild to build the module to be documented.  By default it uses xcodebuild if there is a .xcodeproj file in the source directory.
+
+author:
+
+  # Command line:  -a, --author AUTHOR_NAME
+  # Name of author to attribute in docs (e.g. Realm)
+
+author_url:
+
+  # Command line:  -u, --author_url URL
+  # Author URL of this project (e.g. https://realm.io)
+
+module:
+
+  # Command line:  -m, --module MODULE_NAME
+  # Name of module being documented. (e.g. RealmSwift)
+
+module_version:
+
+  # Command line:  --module-version VERSION
+  # Version string to use as part of the the default docs title and inside the docset.
+  # Default: 1.0
+
+title:
+
+  # Command line:  --title TITLE
+  # Title to display at the top of each page, overriding the default generated from module name and version.
+
+copyright:
+
+  # Command line:  --copyright COPYRIGHT_MARKDOWN
+  # copyright markdown rendered at the bottom of the docs pages
+
+readme:
+
+  # Command line:  --readme FILEPATH
+  # The path to a markdown README file
+
+documentation:
+
+  # Command line:  --documentation GLOB
+  # Glob that matches available documentation
+
+abstract:
+
+  # Command line:  --abstract GLOB
+  # Glob that matches available abstracts for categories
+
+podspec:
+
+  # Command line:  --podspec FILEPATH
+  # A CocoaPods Podspec that describes the Swift library to document
+
+docset_icon:
+
+  # Command line:  --docset-icon FILEPATH
+
+docset_path:
+
+  # Command line:  --docset-path DIRPATH
+  # The relative path for the generated docset
+
+root_url:
+
+  # Command line:  -r, --root-url URL
+  # Absolute URL root where these docs will be stored
+
+dash_url:
+
+  # Command line:  -d, --dash_url URL
+  # Location of the dash XML feed e.g. https://realm.io/docsets/realm.xml)
+
+github_url:
+
+  # Command line:  -g, --github_url URL
+  # GitHub URL of this project (e.g. https://github.com/realm/realm-cocoa)
+
+github_file_prefix:
+
+  # Command line:  --github-file-prefix PREFIX
+  # GitHub URL file prefix of this project (e.g. https://github.com/realm/realm-cocoa/tree/v0.87.1)
+
+disable_search:
+
+  # Command line:  --disable-search
+  # Avoid generating a search index. Search is available in some themes.
+
+skip_documentation:
+
+  # Command line:  --skip-documentation
+  # Will skip the documentation generation phase.
+
+min_acl:
+
+  # Command line:  --min-acl [private | fileprivate | internal | public | open]
+  # minimum access control level to document
+  # Default: public
+
+skip_undocumented:
+
+  # Command line:  --[no-]skip-undocumented
+  # Don't document declarations that have no documentation comments.
+
+hide_documentation_coverage:
+
+  # Command line:  --[no-]hide-documentation-coverage
+  # Hide "(X% documented)" from the generated documents
+
+custom_categories:
+
+  # Custom navigation categories to replace the standard “Classes, Protocols, etc.”
+  # Types not explicitly named in a custom category appear in generic groups at the end.
+  # Example: https://git.io/v4Bcp
+  # Default: []
+
+head:
+
+  # Command line:  --head HTML
+  # Custom HTML to inject into <head></head>.
+
+theme:
+
+  # Command line:  --theme [apple | fullwidth | jony | DIRPATH]
+  # Which theme to use. Specify either 'apple' (default), one of the other built-in theme names, or the path to your mustache templates and other assets for a custom theme.
+  # Default: apple
+
+use_safe_filenames:
+
+  # Command line:  --use-safe-filenames
+  # Replace unsafe characters in filenames with an encoded representation. This will reduce human readability of some URLs, but may be necessary for projects that expose filename-unfriendly functions such as /(_:_:)
+
+undocumented_text:
+
+  # Command line:  --undocumented-text UNDOCUMENTED_TEXT
+  # Default text for undoc

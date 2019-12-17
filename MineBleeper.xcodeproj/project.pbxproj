@@ -14,6 +14,7 @@
 		5B3E732B2375438C005FA313 /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3E732A2375438C005FA313 /* BoardView.swift */; };
 		5B3E73322375556B005FA313 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3E73312375556B005FA313 /* Constants.swift */; };
 		5B3E733823757A39005FA313 /* ka1.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5B3E733723757A26005FA313 /* ka1.ttf */; };
+		5B5C747523A8C1D00027B7A7 /* FourButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5C747423A8C1D00027B7A7 /* FourButtonView.swift */; };
 		5B8762B22386387700E2F97A /* Scoreboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8762B12386387700E2F97A /* Scoreboard.swift */; };
 		5B8762B42391CAE100E2F97A /* GameInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8762B32391CAE100E2F97A /* GameInteractor.swift */; };
 		5B8762B62391CC4C00E2F97A /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8762B52391CC4C00E2F97A /* Tile.swift */; };
@@ -56,6 +57,7 @@
 		5B3E732A2375438C005FA313 /* BoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
 		5B3E73312375556B005FA313 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		5B3E733723757A26005FA313 /* ka1.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ka1.ttf; sourceTree = "<group>"; };
+		5B5C747423A8C1D00027B7A7 /* FourButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourButtonView.swift; sourceTree = "<group>"; };
 		5B8762B12386387700E2F97A /* Scoreboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scoreboard.swift; sourceTree = "<group>"; };
 		5B8762B32391CAE100E2F97A /* GameInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameInteractor.swift; sourceTree = "<group>"; };
 		5B8762B52391CC4C00E2F97A /* Tile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 				5B8762B52391CC4C00E2F97A /* Tile.swift */,
 				5B0B361F239E73DA00023F80 /* Enumerations.swift */,
 				5BECCC8323A3039200B7126F /* Anagrams.swift */,
+				5B5C747423A8C1D00027B7A7 /* FourButtonView.swift */,
 				5B3E732C23755215005FA313 /* Views */,
 				5BF14CE32375007900387859 /* Assets.xcassets */,
 				5BF14CE52375007900387859 /* LaunchScreen.storyboard */,
@@ -324,6 +327,7 @@
 			files = (
 				5B0B361E239E47F200023F80 /* CompletionView.swift in Sources */,
 				5B3E492D239C787700525BC6 /* GameViewController.swift in Sources */,
+				5B5C747523A8C1D00027B7A7 /* FourButtonView.swift in Sources */,
 				5B8762B42391CAE100E2F97A /* GameInteractor.swift in Sources */,
 				5BF14CDF2375007700387859 /* RootViewController.swift in Sources */,
 				5BF14D0B2375067800387859 /* Cell.swift in Sources */,

@@ -64,11 +64,14 @@ class BoardView: UIStackView {
         board[indexPath.section][indexPath.row].update(with: tile)
     }
     
-    @objc func open(sender: UITapGestureRecognizer) {
+    @objc
+    func open(sender: UITapGestureRecognizer) {
         guard let cell = sender.view as? Cell else { return }
         listener?.viewTapped(at: cell.column, and: cell.row)
     }
-    @objc func flag(sender: UITapGestureRecognizer) {
+    
+    @objc
+    func flag(sender: UITapGestureRecognizer) {
         guard let cell = sender.view as? Cell else { return }
         switch sender.state {
         case .began:
@@ -77,9 +80,7 @@ class BoardView: UIStackView {
             break
         }
     }
-    
-    
-    
+        
     private func getCell(row: Int, column: Int) -> Cell {
         let cell = Cell(row: row, column: column)
         
