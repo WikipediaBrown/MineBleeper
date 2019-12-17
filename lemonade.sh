@@ -2,7 +2,7 @@
 # 
 # Initial values needed to build Jekyll site
 APP_NAME=${PWD##*/}
-STYLED_NAME="Mine\r\nBleeper"
+STYLED_NAME="Mine<br/>Bleeper"
 JEKYLL_DIRECTORY=docs
 
 
