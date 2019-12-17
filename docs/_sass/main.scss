@@ -1,34 +1,15 @@
-.current {
-    text-decoration: underline;
-}
-
-nav {
-    width: 100%;
-}
-
-nav a:hover {
-    color: red;
-}
-
-nav a {
-    color: white;
-    font-size: 1vw;
-    font-family: "SF Display";
-    font-weight: 900;
-    text-align: center;
-    text-decoration: none;
-}
-
 body {
     background-color: black;
     color: white;
-    font-size: 9vw;
     font-family: "SF Display";
-    font-weight: 900;
 }
 
-@font-face {
-    font-family: "SF Display";
-    font-weight: 900;
-    src: url("https:\/\/sf.abarba.me\/SF-UI-Display-Black.otf");
-}
+nav {
+    background-color: black;
+    display: block;
+    padding: 10px 20px;
+    margin: 10;
+    overflow: scroll;
+    position: fixed; \/* Set the navbar to fixed position *\/
+    top: 0; \/* Position the navbar at the top of the page *\/
+    width: 100
