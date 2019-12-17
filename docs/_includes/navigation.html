@@ -1,3 +1,4 @@
 <nav>
     <ul>
-        { 0.000000or item in site.data.navigation 
+        {% for item in site.data.navigation %}
+        <li><a href="{{ site.baseurl }}{{ item.link }}" { 0f page.url == item.link 
