@@ -47,8 +47,7 @@ NAVIGATION_DATA="- name: BLEEP\r\n  link: /\r\n- name: About\r\n  link: /about.h
 add_file ./_data navigation.yml "$NAVIGATION_DATA" 'Navigation Data'
 
 # Adding Navigation HTML
-NAVIGATION_HTML="<nav>\r\n    <ul>\r\n        {% for item in site.data.navigation %}\r\n        <li><a href=\"{{ site.baseurl }}{{ item.link }}\" {% if page.url == item.link %}class=\"current\"{% endif %}>{{ item.name }}<\/a><\/li>\r\n        {% endfor %}\r\n    <\/ul>\r\n<\/nav>\r\n"
-
+NAVIGATION_HTML="<nav>\r\n    {%% for item in site.data.navigation %%}\r\n        <a href=\"{{ site.baseurl }}{{ item.link }}\" {%% if page.url == item.link %%}class=\"current\"{%% endif %%}>{{ item.name }}</a>\r\n    {%% endfor %%}\r\n</nav>\r\n"
 add_file ./_includes navigation.html "$NAVIGATION_HTML" 'Navigation HTML'
 
 
