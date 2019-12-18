@@ -1,0 +1,19 @@
+body { background-color: black; color: white; font-family: "SF Display"; }
+
+header { overflow: scroll; display: inline; position: fixed; top: 0; width: 100%; }
+
+nav ul { float: right; display: inline; }
+
+nav ul li { display: inline; }
+
+nav ul li a { color: white; float: left; font-size: 2vw; font-weight: 900; display: block; text-decoration: none; }
+
+nav a:hover { color: red; }
+
+.current { text-decoration: underline; }
+
+.splashScreenLabel { color: white; font-size: 12vw; font-weight: 900; }
+
+@font-face { font-family: "SF Display"; font-weight: 900; src: url("https://sf.abarba.me/SF-UI-Display-Black.otf"); }
+
+/*# sourceMappingURL=styles.css.map */
