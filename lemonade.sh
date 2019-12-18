@@ -2,6 +2,7 @@
 # 
 # Initial values needed to build Jekyll site
 APP_NAME=${PWD##*/}
+APP_DESCRIPTION="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pulvinar pellentesque habitant morbi tristique senectus et netus et. Purus in massa tempor nec feugiat nisl pretium fusce. Habitant morbi tristique senectus et netus et malesuada fames. Feugiat sed lectus vestibulum mattis ullamcorper velit sed. Sed velit dignissim sodales ut eu sem integer vitae. Habitant morbi tristique senectus et netus. Nec sagittis aliquam malesuada bibendum arcu vitae elementum. Elit ullamcorper dignissim cras tincidunt lobortis feugiat vivamus at augue. Netus et malesuada fames ac turpis egestas."
 STYLED_NAME="Mine<br/>Bleeper"
 JEKYLL_DIRECTORY=docs
 
@@ -87,7 +88,7 @@ ERROR_MD="---\r\nlayout: default\r\n---\r\n\r\n# 404\r\n\r\nPage not found! :("
 add_file . 404.md "$ERROR_MD" '404'
 
 # Adding Index File
-INDEX_HTML="---\r\ntitle: Home\r\n---\r\n<div class=\"splashScreenLabel\"><h1>Mine<br/>Bleeper</h1></div>\r\n\r\n<p>It\'s the app for that!</p>"
+INDEX_HTML="---\r\ntitle: Home\r\n---\r\n<div class=\"splashScreenLabel\"><h1>Mine<br/>Bleeper</h1></div>\r\n\r\n<div><p>It\'s the app for that!</p></div><div><p>$APP_DESCRIPTION</p></div>"
 add_file . index.html "$INDEX_HTML" 'Index'
 
 # Adding Support File
