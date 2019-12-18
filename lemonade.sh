@@ -88,7 +88,7 @@ ERROR_MD="---\r\nlayout: default\r\n---\r\n\r\n# 404\r\n\r\nPage not found! :("
 add_file . 404.md "$ERROR_MD" '404'
 
 # Adding Index File
-INDEX_HTML="---\r\ntitle: Home\r\n---\r\n<h1 class=\"splashScreenLabel\">$STYLED_NAME</h1>\r\n\r\n<p>It's the app for that!</p>"
+INDEX_HTML="---\r\ntitle: Home\r\n---\r\n<div><h1 class=\"splashScreenLabel\">Mine<br/>Bleeper</h1></div>\r\n\r\n<p>It\'s the app for that!</p>"
 add_file . index.html "$INDEX_HTML" 'Index'
 
 # Adding Support File
@@ -116,8 +116,7 @@ SASS_IMPORT="---\r\n---\r\n@import \"main\";"
 add_file ./assets/css styles.scss "$SASS_IMPORT" 'SASS Import'
 
 # Adding SASS
-SASS=".current {\r\n    text-decoration: underline;\r\n}\r\n\r\nnav {\r\n    width: 100%%;\r\n}\r\n\r\nnav a:hover {\r\n    color: red;\r\n}\r\n\r\nnav a {\r\n    color: white;\r\n    font-size: 1vw;\r\n    font-family: \"SF Display\";\r\n    font-weight: 900;\r\n    text-align: center;\r\n    text-decoration: none;\r\n}\r\n\r\nbody {\r\n    background-color: black;\r\n    color: white;\r\n    font-size: 9vw;\r\n    font-family: \"SF Display\";\r\n    font-weight: 900;\r\n}\r\n\r\n@font-face {\r\n    font-family: \"SF Display\";\r\n    font-weight: 900;\r\n    src: url(\"https:\\\/\\\/sf.abarba.me\\\/SF-UI-Display-Black.otf\");\r\n}"
-
+SASS="body {\r\n    background-color: black;\r\n    font-family: \"SF Display\";\r\n}\r\n\r\nheader {\r\n    width: 100%;\r\n}\r\n\r\nnav {\r\n    float: left;\r\n    width: 100%;\r\n}\r\n\r\nnav a:hover {\r\n    color: red;\r\n}\r\n\r\nnav ul {\r\n    display: inline;\r\n}\r\n\r\nnav ul li {\r\n    display: inline;\r\n}\r\n\r\nnav ul li a {\r\n    color: white;\r\n    font-size: 1vw;\r\n    font-weight: 900;\r\n    display: block;\r\n    text-decoration: none;\r\n}\r\n\r\n.current {\r\n    text-decoration: underline;\r\n}\r\n\r\n.splashScreenLabel {\r\n    color: white;\r\n    font-size: 10vw;\r\n    font-weight: 900;\r\n}\r\n\r\n@font-face {\r\n    font-family: \"SF Display\";\r\n    font-weight: 900;\r\n    src: url(\"https:\\\/\\\/sf.abarba.me\\\/SF-UI-Display-Black.otf\");\r\n}"
 add_file ./_sass main.scss "$SASS" 'SASS'
 
 #Downloading Privacy Policy
