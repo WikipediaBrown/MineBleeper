@@ -88,7 +88,7 @@ ERROR_MD="---\r\nlayout: default\r\n---\r\n\r\n# 404\r\n\r\nPage not found! :("
 add_file . 404.md "$ERROR_MD" '404'
 
 # Adding Index File
-INDEX_HTML="---\r\ntitle: Home\r\n---\r\n<div><h1 class=\"splashScreenLabel\">Mine<br/>Bleeper</h1></div>\r\n\r\n<p>It\'s the app for that!</p>"
+INDEX_HTML="---\r\ntitle: Home\r\n---\r\n<div class=\"splashScreenLabel\"><h1>Mine<br/>Bleeper</h1></div>\r\n\r\n<p>It\'s the app for that!</p>"
 add_file . index.html "$INDEX_HTML" 'Index'
 
 # Adding Support File
