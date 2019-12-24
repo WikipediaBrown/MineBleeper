@@ -65,7 +65,7 @@ class GameInteractor: GameInteractable {
     }
 
     func onSelectIndex(at indexPath: IndexPath) {
-        guard gameState == .inProgress else { return }
+        guard gameState == .inProgress || gameState == .notStarted else { return }
         let row = indexPath.row
         let column = indexPath.section
         let cell = board[column][row]
