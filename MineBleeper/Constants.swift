@@ -26,7 +26,7 @@ enum Constants {
         }
     }
     enum Doubles {
-        static let bleepRatio: Double = 0.99
+        static let bleepRatio: Double = 0.10
     }
     enum Colors {
         static var successGreen: UIColor { UIColor(red: 126/255, green: 235/255, blue: 136/255, alpha: 1) }

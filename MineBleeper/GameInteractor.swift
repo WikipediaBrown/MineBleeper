@@ -15,7 +15,7 @@ protocol GamePresentable {
     func presentResult(with  bleeps: [IndexPath], and gameState: GameState)
     func presentScore(score: Int)
     func toggleBleeps(at indexPaths: [IndexPath])
-    func update(indexPaths: [IndexPath])
+    func update(indexPaths: [IndexPath], with feedback: GameFeedback)
 }
 
 class GameInteractor: GameInteractable {
@@ -63,7 +63,7 @@ class GameInteractor: GameInteractable {
         _ = movement.add { [weak self] in self?.onTic() }
         presenter.presentGame()
     }
-
+    
     func onSelectIndex(at indexPath: IndexPath) {
         guard gameState == .inProgress || gameState == .notStarted else { return }
         let row = indexPath.row
@@ -84,7 +84,7 @@ class GameInteractor: GameInteractable {
         else { open(column: column, row: row) }
         
         selections += 1
-        update()
+        update(feedback: .open)
     }
     
     func setupBoard() {
@@ -108,8 +108,12 @@ class GameInteractor: GameInteractable {
         guard board[column][row].surroundingBleeps == nil else { return }
         
         board[column][row].flagged = !board[column][row].flagged
+        let feedback: GameFeedback = board[column][row].flagged ? .flag : .unflag
         indicesToUpdate.append(indexPath)
-        update()
+        let generator = UIImpactFeedbackGenerator(style: .heavy)
+        generator.prepare()
+        generator.impactOccurred()
+        update(feedback: feedback)
     }
     
     
@@ -126,7 +130,7 @@ class GameInteractor: GameInteractable {
         isCheating = false
         movement.reset()
         setupBoard()
-        update()
+        update(feedback: .tryAgain)
         presenter.presentScore(score: score)
         gameState = .notStarted
     }
@@ -213,6 +217,9 @@ class GameInteractor: GameInteractable {
     }
     
     private func error() { presenter.presentError() }
-    private func update() { presenter.update(indexPaths: indicesToUpdate); indicesToUpdate.removeAll() }
+    private func update(feedback: GameFeedback) {
+        presenter.update(indexPaths: indicesToUpdate, with: feedback)
+        indicesToUpdate.removeAll()
+    }
 
 }

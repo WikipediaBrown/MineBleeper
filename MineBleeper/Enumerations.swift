@@ -14,3 +14,14 @@ enum GameState {
     case won
     case lost
 }
+
+
+enum GameFeedback {
+    case tryAgain
+    case cheat
+    case open
+    case flag
+    case unflag
+    case lose
+    case win
+}

@@ -78,6 +78,9 @@ class GameViewController: UIViewController, GamePresentable {
     }
     
     func presentGame() {
+        let generator = UINotificationFeedbackGenerator()
+        generator.prepare()
+        generator.notificationOccurred(.success)
         setupGameViews()
     }
     
@@ -131,11 +134,12 @@ class GameViewController: UIViewController, GamePresentable {
         }        
     }
     
-    func update(indexPaths: [IndexPath]) {
+    func update(indexPaths: [IndexPath], with feedback: GameFeedback) {
         for indexPath in indexPaths {
             let tile = listener?.onTileRequest(at: indexPath)
             boardView.updateIndex(with: indexPath, with: tile)
         }
+        produceFeedback(feedback: feedback)
     }
     
     func toggleBleeps(at indexPaths: [IndexPath]) {
@@ -238,6 +242,18 @@ class GameViewController: UIViewController, GamePresentable {
             self?.guestbutton.removeFromSuperview()
             UIView.animate(withDuration: 2) { [weak self] in self?.boardView.alpha = 1 }
             UIView.animate(withDuration: 3) { [weak self] in self?.navigationBar.alpha = 1 }
+        }
+    }
+    
+    private func produceFeedback(feedback: GameFeedback) {
+        switch feedback {
+        case .cheat: UINotificationFeedbackGenerator().notificationOccurred(.warning)
+        case .flag: UIImpactFeedbackGenerator(style: .light).impactOccurred()
+        case .lose: UINotificationFeedbackGenerator().notificationOccurred(.error)
+        case .open: UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
+        case .tryAgain: UINotificationFeedbackGenerator().notificationOccurred(.error)
+        case .unflag: UIImpactFeedbackGenerator(style: .light).impactOccurred()
+        case .win: UINotificationFeedbackGenerator().notificationOccurred(.success)
         }
     }
 }
